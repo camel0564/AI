@@ -1,26 +1,27 @@
 {
   "name": "ai",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.23.0",
   "description": "",
+  "author": "hanfengv <hanfengv@gmail.com>",
+  "license": "MIT",
+  "keywords": [],
   "main": "index.js",
   "scripts": {
     "dev": "turbo dev",
-    "build": "turbo build"
+    "build": "turbo build",
+    "lint": "turbo lint"
   },
-  "keywords": [ ],
-  "author": "hanfengv <hanfengv@gmail.com>",
-  "license": "MIT",
   "devEngines": {
     "node": "24.11.1"
   },
-  "packageManager": "pnpm@10.23.0",
   "devDependencies": {
-    "turbo": "catalog:dev",
-    "typescript": "catalog:dev",
-    "tsx": "catalog:dev",
+    "@antfu/eslint-config": "catalog:dev",
     "@types/node": "catalog:types",
     "eslint": "catalog:dev",
-    "@antfu/eslint-config": "catalog:dev",
+    "tsx": "catalog:dev",
+    "turbo": "catalog:dev",
+    "typescript": "catalog:dev",
     "vitest": "catalog:test"
   }
 }

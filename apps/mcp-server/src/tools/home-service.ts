@@ -1,5 +1,5 @@
-import { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { z } from 'zod';
+import type { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { z } from 'zod'
 
 const servicesDB: HomeService[] = [
   { id: 'clean001', name: '日常保洁', type: 'cleaning', price: '50元/小时', duration: '2-4小时', description: '专业保洁团队，包含全屋清洁、厨房卫生间清洁', rating: 4.8, available: true },
@@ -21,49 +21,49 @@ const servicesDB: HomeService[] = [
   { id: 'beauty002', name: '美容护肤', type: 'beauty', price: '198元起', duration: '2-3小时', description: '专业美容师上门，包含面部清洁、护理等', rating: 4.7, available: true },
   { id: 'beauty003', name: '美睫服务', type: 'beauty', price: '158元起', duration: '1.5小时', description: '专业美睫师上门嫁接睫毛', rating: 4.8, available: true },
   { id: 'beauty004', name: '化妆造型', type: 'beauty', price: '288元起', duration: '2小时', description: '专业化妆师上门化妆造型服务', rating: 4.9, available: true },
-  { id: 'beauty005', name: '头皮护理', type: 'beauty', price: '168元起', duration: '1.5小时', description: '专业头皮清洁和护理服务', rating: 4.6, available: true }
+  { id: 'beauty005', name: '头皮护理', type: 'beauty', price: '168元起', duration: '1.5小时', description: '专业头皮清洁和护理服务', rating: 4.6, available: true },
 ]
 const homeServiceItem = z.object({
-  id: z.string().describe("服务ID"),
-  name: z.string().describe("服务名称"),
-  type: z.string().describe("服务类型"),
-  price: z.string().describe("价格"),
-  duration: z.string().describe("服务时长"),
-  description: z.string().describe("服务描述"),
-  rating: z.number().min(0).max(5).describe("评分"),
-  available: z.boolean().describe("是否可预约"),
+  id: z.string().describe('服务ID'),
+  name: z.string().describe('服务名称'),
+  type: z.string().describe('服务类型'),
+  price: z.string().describe('价格'),
+  duration: z.string().describe('服务时长'),
+  description: z.string().describe('服务描述'),
+  rating: z.number().min(0).max(5).describe('评分'),
+  available: z.boolean().describe('是否可预约'),
 })
 
 /** 家庭服务输出 */
 const homeServicesListOut = z.object({
-  services: z.array(homeServiceItem).describe("服务列表")
+  services: z.array(homeServiceItem).describe('服务列表'),
 })
-type HomeService = z.infer<typeof homeServiceItem>;
+type HomeService = z.infer<typeof homeServiceItem>
 
 /** 家庭服务列表 tool */
 const homeServicesListTool: ToolCallback = async () => {
-  const services = await getHomeServicesList();
+  const services = await getHomeServicesList()
   const output = { services }
   return {
     structuredContent: output,
     content: [{ type: 'text', text: JSON.stringify(output) }],
-  };
+  }
 }
 const servicesNames = servicesDB.map(n => n.name)
 
 /** 家庭服务详情 */
 const homeServiceInputSchema = z.object({
-  serviceName: z.enum(servicesNames).describe("服务名称,例如: 日常保洁, 水电维修, 上门美甲"),
+  serviceName: z.enum(servicesNames).describe('服务名称,例如: 日常保洁, 水电维修, 上门美甲'),
 })
-type HomeServiceInput = z.infer<typeof homeServiceInputSchema>;
+type HomeServiceInput = z.infer<typeof homeServiceInputSchema>
 
 /** 家庭服务详情 tool */
 const homeServiceTool: ToolCallback<typeof homeServiceInputSchema> = async (input) => {
-  const output = await getHomeServiceApi(input);
+  const output = await getHomeServiceApi(input)
   return {
     structuredContent: output,
     content: [{ type: 'text', text: JSON.stringify(output) }],
-  };
+  }
 }
 
 /** 注册家庭服务 tool */
@@ -77,8 +77,8 @@ export function registerHomeServiceTool(server: McpServer) {
       inputSchema: undefined,
       outputSchema: homeServicesListOut,
     },
-    homeServicesListTool
-  );
+    homeServicesListTool,
+  )
 
   // 服务详情
   server.registerTool(
@@ -89,27 +89,27 @@ export function registerHomeServiceTool(server: McpServer) {
       inputSchema: homeServiceInputSchema,
       outputSchema: homeServiceItem,
     },
-    homeServiceTool
-  );
+    homeServiceTool,
+  )
 }
 
 /** 模拟获取家庭服务列表API */
 async function getHomeServicesList(): Promise<HomeService[]> {
   // 模拟API延迟
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise(resolve => setTimeout(resolve, 200))
   return servicesDB
 }
 
 /** 模拟获取家庭服务详情API */
 async function getHomeServiceApi(input: HomeServiceInput): Promise<HomeService | undefined> {
   // 模拟API延迟
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise(resolve => setTimeout(resolve, 200))
   return servicesDB.find(item => item.name === input.serviceName)
 }
 
 /** 模拟获取家庭服务详情API */
 export async function getHomeServiceByIdApi(id: string): Promise<HomeService | undefined> {
   // 模拟API延迟
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise(resolve => setTimeout(resolve, 200))
   return servicesDB.find(item => item.id === id)
 }

@@ -1,14 +1,16 @@
 {
   "name": "@ai/mcp-server",
+  "type": "module",
   "version": "1.0.0",
   "description": "a mcp server",
-  "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "dev": "tsx ./src/index.ts",
     "build": "tsc",
+    "lint": "eslint --fix",
+    "lint:inspect": "eslint --inspect-config",
     "serve": "chmod 755 dist/index.js && node ./dist/index.js",
     "kill": "kill -9 $(lsof -ti:3127)"
   },
@@ -19,10 +21,10 @@
   },
   "devDependencies": {
     "@ai/typescript-config": "workspace:*",
+    "@types/express": "catalog:types",
+    "@types/node": "catalog:types",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev",
-    "vitest": "catalog:test",
-    "@types/express": "catalog:types",
-    "@types/node": "catalog:types"
+    "vitest": "catalog:test"
   }
 }
