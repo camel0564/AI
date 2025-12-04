@@ -13,6 +13,11 @@
 - 学习成本
 - 包权限无法细化
 
+## 命令
+
+- `nr dev` 启动所有包的开发模式
+- `nr build` 构建所有包 `nr build --filter=@ai/tools --filter=@ai/ui`
+
 ## 目录结构
 
 ```

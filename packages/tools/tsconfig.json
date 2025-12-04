@@ -4,4 +4,5 @@
     "outDir": "dist"
   },
   "include": [ "src/**/*" ],
+  "exclude": ["node_modules"]
 }
