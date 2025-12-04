@@ -13,7 +13,7 @@ export function getAppInfoByPkg(pkg: { name: string, version: string, port: numb
   const AppInfo = {
     name: pkg.name,
     version: pkg.version,
-    port: parseInt(process.env[`${pkg.name}_PORT`]) || pkg.port,
+    port: parseInt(process.env[`${pkg.name}_PORT`] || `${pkg.port}`),
   }
   console.log('🚀 AppInfo:', AppInfo);
   return AppInfo

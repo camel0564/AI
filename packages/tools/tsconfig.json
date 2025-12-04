@@ -1,4 +1,7 @@
 {
   "extends": "@ai/typescript-config/tsconfig.base.json",
-  "include": ["src/**/*"],
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [ "src/**/*" ],
 }
