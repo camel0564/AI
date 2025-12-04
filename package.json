@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "turbo dev",
+    "build": "turbo build"
   },
   "keywords": [],
   "author": "hanfengv <hanfengv@gmail.com>",
@@ -14,6 +15,8 @@
   },
   "packageManager": "pnpm@10.23.0",
   "devDependencies": {
-    "turbo": "catalog:dev"
+    "turbo": "catalog:dev",
+    "@types/node": "catalog:types",
+    "vitest": "catalog:test"
   }
 }

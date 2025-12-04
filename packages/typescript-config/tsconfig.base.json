@@ -4,13 +4,13 @@
     "target": "esnext", // 决定编译后 JS 代码的「语法版本」; 例如: const,箭头函数等
     "module": "nodenext", // 决定编译后 JS 代码的「模块系统格式」 (CommonJS、ESModule、NodeNext）
     "moduleResolution": "nodenext", // 决定 TS 编译器「如何查找导入的模块文件」（如查找 node_modules、路径解析规则）。
-    "outDir": "dist", // 输出目录
-    // "rootDir": ".", // 这里不能设置需要再项目中配置; 源文件,设置为 "." 会以tsconfig.json所在目录为根目录,结合include/exclude配置
+    // "outDir": "dist", // 禁止设置请去项目中配置; 输出目录
+    // "rootDir": ".", // 禁止设置请去项目中配置; 源文件,设置为 "." 会以tsconfig.json所在目录为根目录,结合include/exclude配置
     "strict": true, // 严格检查类型错误
     "esModuleInterop": true, // 兼容 CommonJS 语法的三方库
     "skipLibCheck": true, // 跳过三方库类型检查，提高编译速度
     "forceConsistentCasingInFileNames": true // 强制文件名大小写一致
   },
-  // "include": ["src/**/*"], // 这里不能设置需要再项目中配置
+  // "include": ["src/**/*"], // 禁止设置请去项目中配置
   "exclude": ["node_modules"]
 }

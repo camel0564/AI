@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { camelTokeba } from '@ai/tools'
 
 defineProps<{ msg: string }>()
 
+const kebaName = camelTokeba('monoreopSuccess')
 const count = ref(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
+  <h2>{{ kebaName }}</h2>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>

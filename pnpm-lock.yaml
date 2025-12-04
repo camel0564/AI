@@ -59,12 +59,21 @@ importers:
 
   .:
     devDependencies:
+      '@types/node':
+        specifier: catalog:types
+        version: 24.10.1
       turbo:
         specifier: catalog:dev
         version: 2.6.2
+      vitest:
+        specifier: catalog:test
+        version: 4.0.15(@types/node@24.10.1)(tsx@4.21.0)
 
   apps/agent-client:
     dependencies:
+      '@ai/tools':
+        specifier: workspace:*
+        version: link:../../packages/tools
       vue:
         specifier: catalog:prod
         version: 3.5.25(typescript@5.9.3)
