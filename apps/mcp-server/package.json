@@ -1,0 +1,38 @@
+{
+  "name": "@ai/mcp-server",
+  "version": "1.0.0",
+  "description": "a mcp server",
+  "type": "module",
+  "bin": {
+    "ai-mcp-server": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "main": "./build/index.js",
+  "license": "MIT",
+  "_devEngines": {
+    "node": "24.11.1"
+  },
+  "packageManager": "pnpm@10.23.0",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "debug": "mcp-inspector http://localhost:3127/mcp",
+    "build": "tsc && chmod 755 build/index.js",
+    "serve": "node ./build/index.js",
+    "kill": "kill -9 $(lsof -ti:3127)"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "catalog:prod",
+    "express": "catalog:prod",
+    "zod": "catalog:prod"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "catalog:dev",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vitest": "catalog:test",
+    "@types/express": "catalog:types",
+    "@types/node": "catalog:types"
+  }
+}

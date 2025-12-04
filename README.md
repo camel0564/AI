@@ -1,0 +1,24 @@
+# FlutterBase AI
+
+## Monorepo
+
+优点：
+
+- 代码共享：多个包可以共享相同的代码，避免重复编写。
+- 包版本依赖不会冲突
+- 统一CI/CD
+
+缺点:
+- 代码管理：由于所有代码都在一个仓库中，管理起来可能会比较复杂。
+- 学习成本
+- 包权限无法细化
+
+## 目录结构
+
+```
+├─ README.md
+└─ packages/              # Monorepo 包
+   ├─ agent-client/       # 智能体客户端
+   ├─ mcp-client/         # MCP客户端
+   └─ mcp-server/         # MCP服务端
+```

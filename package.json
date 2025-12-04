@@ -1,0 +1,19 @@
+{
+  "name": "ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "hanfengv <hanfengv@gmail.com>",
+  "license": "MIT",
+  "devEngines": {
+    "node": "24.11.1"
+  },
+  "packageManager": "pnpm@10.23.0",
+  "devDependencies": {
+    "turbo": "catalog:dev"
+  }
+}
