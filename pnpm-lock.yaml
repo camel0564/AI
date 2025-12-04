@@ -62,9 +62,15 @@ importers:
       '@types/node':
         specifier: catalog:types
         version: 24.10.1
+      tsx:
+        specifier: catalog:dev
+        version: 4.21.0
       turbo:
         specifier: catalog:dev
         version: 2.6.2
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
       vitest:
         specifier: catalog:test
         version: 4.0.15(@types/node@24.10.1)(tsx@4.21.0)
@@ -139,12 +145,6 @@ importers:
       '@ai/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      tsx:
-        specifier: catalog:dev
-        version: 4.21.0
-      typescript:
-        specifier: catalog:dev
-        version: 5.9.3
 
   packages/typescript-config: {}
 

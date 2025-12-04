@@ -7,7 +7,7 @@
     "dev": "turbo dev",
     "build": "turbo build"
   },
-  "keywords": [],
+  "keywords": [ ],
   "author": "hanfengv <hanfengv@gmail.com>",
   "license": "MIT",
   "devEngines": {
@@ -17,6 +17,8 @@
   "devDependencies": {
     "turbo": "catalog:dev",
     "@types/node": "catalog:types",
-    "vitest": "catalog:test"
+    "vitest": "catalog:test",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev"
   }
 }
