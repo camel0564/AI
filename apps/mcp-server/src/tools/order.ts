@@ -68,7 +68,7 @@ const getOrderInputSchema = z.object({
   orderId: z.string().describe('订单ID'),
 })
 
-type GetOrderInput = z.infer<typeof getOrderInputSchema>
+// type GetOrderInput = z.infer<typeof getOrderInputSchema>
 
 /** 查询订单输出schema */
 const getOrderOutputSchema = z.object({

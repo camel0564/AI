@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
 import express from 'express'
@@ -53,7 +54,9 @@ app.post('/mcp', async (req, res) => {
   await server.connect(transport)
   await transport.handleRequest(req, res, req.body)
 })
-app.get('/mcp', async (_req, res) => { res.send({ msg: `${AppName} 启动成功` }) }) // 必须处理get请求 返回200,否则警告
+app.get('/mcp', async (_req, res) => {
+  res.send({ msg: `${AppName} 启动成功` })
+}) // 必须处理get请求 返回200,否则警告
 
 const port = Number.parseInt(process.env[`${AppName}_PORT`] || '3127')
 app.listen(port, () => {

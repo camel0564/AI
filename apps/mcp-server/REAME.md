@@ -25,9 +25,9 @@ mcp server features:
 
 ## ai-agents 对比
 
-| name      | stars | langs  |
-| --------- | ----- | ------ |
-| langchain | 121k  | python |
+| name      | stars | langs              |
+| --------- | ----- | ------------------ |
+| langchain | 121k  | python             |
 | dify      | 120k  | python / ts(react) |
 
 ## 使用

@@ -1,3 +1,4 @@
+import process from 'node:process'
 import pkg from '../../package.json' with { type: 'json' }
 /** 应用信息 */
 export const AppInfo = {

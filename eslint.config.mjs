@@ -11,6 +11,7 @@ export default eslintConfig(
     },
     ignores: [
       '**/*.Iconify.json',
+      '**/*.md',
     ],
     rules: {
       'no-console': 'off',
