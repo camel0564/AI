@@ -6,5 +6,5 @@ export * from './number'
 export * from './string'
 // 类型守护
 export * from './type-guard'
-// 其他
+// 常用公共函数
 export * from './common'

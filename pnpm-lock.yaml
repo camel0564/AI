@@ -125,6 +125,18 @@ importers:
         specifier: catalog:test
         version: 4.0.15(@types/node@24.10.1)(tsx@4.21.0)
 
+  packages/tools:
+    devDependencies:
+      '@ai/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      tsx:
+        specifier: catalog:dev
+        version: 4.21.0
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
+
   packages/typescript-config: {}
 
 packages:

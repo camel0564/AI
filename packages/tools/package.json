@@ -1,0 +1,15 @@
+{
+  "name": "@ai/tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@ai/typescript-config": "workspace:*",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev"
+  }
+}

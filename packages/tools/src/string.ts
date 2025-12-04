@@ -34,6 +34,6 @@ const _uuid = crypto?.randomUUID
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16)
     })
 
-export function getUUID(separator = '-'): string {
+export function genUUID(separator = '-'): string {
   return separator === '-' ? _uuid() : _uuid().replace(/-/g, separator)
 }
