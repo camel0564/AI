@@ -17,5 +17,12 @@ ts 配置文件
 ```json
 {
   "extends": "@ai/typescript-config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "src",
+    "outDir": "dist",
+  },
+  "include": [ "src/**/*" ],
+  "exclude": ["node_modules"]
 }
 ```

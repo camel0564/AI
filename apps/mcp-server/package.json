@@ -3,22 +3,13 @@
   "version": "1.0.0",
   "description": "a mcp server",
   "type": "module",
-  "bin": {
-    "ai-mcp-server": "./dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "license": "MIT",
-  "_devEngines": {
-    "node": "24.11.1"
-  },
-  "packageManager": "pnpm@10.23.0",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "dev": "tsx ./src/index.ts",
-    "build": "tsc && chmod 755 dist/index.js",
-    "serve": "node ./dist/index.js",
+    "build": "tsc",
+    "serve": "chmod 755 dist/index.js && node ./dist/index.js",
     "kill": "kill -9 $(lsof -ti:3127)"
   },
   "dependencies": {
