@@ -1,0 +1,16 @@
+{
+  "name": "@ai/mcp-debug",
+  "version": "1.0.0",
+  "description": "mcp server debugger",
+  "main": "index.js",
+  "scripts": {
+    "dev": "mcp-inspector http://localhost:3127/mcp"
+  },
+  "keywords": [ ],
+  "author": "hanfengv <hanfengv@gmail.com>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.23.0",
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "catalog:dev"
+  }
+}

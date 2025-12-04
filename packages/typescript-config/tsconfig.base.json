@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "esnext", // 决定编译后 JS 代码的「语法版本」; 例如: const,箭头函数等
+    "module": "nodenext", // 决定编译后 JS 代码的「模块系统格式」 (CommonJS、ESModule、NodeNext）
+    "moduleResolution": "nodenext", // 决定 TS 编译器「如何查找导入的模块文件」（如查找 node_modules、路径解析规则）。
+    "outDir": "./build", // 输出
+    "rootDir": "./src", // 源文件
+    "strict": true, // 严格检查类型错误
+    "esModuleInterop": true, // 兼容 CommonJS 语法的三方库
+    "skipLibCheck": true, // 跳过三方库类型检查，提高编译速度
+    "forceConsistentCasingInFileNames": true // 强制文件名大小写一致
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

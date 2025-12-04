@@ -17,8 +17,8 @@
   "packageManager": "pnpm@10.23.0",
   "scripts": {
     "dev": "tsx ./src/index.ts",
-    "debug": "mcp-inspector http://localhost:3127/mcp",
     "build": "tsc && chmod 755 build/index.js",
+    "debug": "mcp-inspector http://localhost:3127/mcp",
     "serve": "node ./build/index.js",
     "kill": "kill -9 $(lsof -ti:3127)"
   },
@@ -28,7 +28,7 @@
     "zod": "catalog:prod"
   },
   "devDependencies": {
-    "@modelcontextprotocol/inspector": "catalog:dev",
+    "@ai/typescript-config": "workspace:*",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:test",
