@@ -10,10 +10,6 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@ai/typescript-config": "workspace:*",
-    "@types/node": "catalog:types",
-    "vitest": "catalog:test",
-    "tsx": "catalog:dev",
-    "typescript": "catalog:dev"
+    "@ai/typescript-config": "workspace:*"
   }
 }

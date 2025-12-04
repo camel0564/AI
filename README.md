@@ -22,7 +22,7 @@
 
 ```
 ├─ README.md
-└─ packages/              # Monorepo 包
+└─ apps/              # Monorepo 包
    ├─ agent-client/       # 智能体客户端
    ├─ mcp-client/         # MCP客户端
    └─ mcp-server/         # MCP服务端

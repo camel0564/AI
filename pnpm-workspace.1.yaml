@@ -1,10 +1,8 @@
-trustPolicy: no-downgrade
-shellEmulator: true
 packages:
   - apps/*
   - packages/*
 
-catalogMode: prefer
+catalogMode: strict
 
 catalogs:
   dev:

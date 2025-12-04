@@ -16,9 +16,11 @@
   "packageManager": "pnpm@10.23.0",
   "devDependencies": {
     "turbo": "catalog:dev",
-    "@types/node": "catalog:types",
-    "vitest": "catalog:test",
+    "typescript": "catalog:dev",
     "tsx": "catalog:dev",
-    "typescript": "catalog:dev"
+    "@types/node": "catalog:types",
+    "eslint": "catalog:dev",
+    "@antfu/eslint-config": "catalog:dev",
+    "vitest": "catalog:test"
   }
 }
