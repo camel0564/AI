@@ -5,15 +5,18 @@
       "persistent": true,
       "cache": false
     },
-    "check-types": {
-      "dependsOn": [ "^check-types" ]
+    "type-check": {
+      "dependsOn": ["^type-check"]
     },
     "lint": {
-      "dependsOn": [ "^lint" ]
+      "dependsOn": ["^lint"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
     },
     "build": {
-      "dependsOn": [ "^build" ],
-      "outputs": [ "dist/**" ]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     }
   }
 }

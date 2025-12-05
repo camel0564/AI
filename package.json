@@ -9,8 +9,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint"
+    "type-check": "turbo type-check",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "build": "turbo build"
   },
   "devEngines": {
     "node": "24.11.1"

@@ -7,8 +7,10 @@
   "types": "src/index.ts",
   "scripts": {
     "dev": "tsx ./src/index.ts",
-    "build": "tsc",
-    "lint": "eslint --fix"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint --fix",
+    "test": "vitest",
+    "build": "tsc"
   },
   "devDependencies": {
     "@ai/typescript-config": "workspace:*"

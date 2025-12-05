@@ -8,9 +8,10 @@
   "types": "src/index.ts",
   "scripts": {
     "dev": "tsx ./src/index.ts",
-    "build": "tsc",
+    "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
-    "lint:inspect": "eslint --inspect-config",
+    "test": "vitest",
+    "build": "tsc",
     "serve": "chmod 755 dist/index.js && node ./dist/index.js",
     "kill": "kill -9 $(lsof -ti:3127)"
   },

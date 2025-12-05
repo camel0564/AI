@@ -1,15 +1,18 @@
 {
   "name": "@ai/agent-client",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build"
+    "type-check": "vue-tsc --build",
+    "lint": "eslint --fix",
+    "test": "vitest",
+    "build": "vite build"
   },
   "dependencies": {
-    "vue": "catalog:prod",
-    "@ai/tools": "workspace:*"
+    "@ai/tools": "workspace:*",
+    "vue": "catalog:prod"
   },
   "devDependencies": {
     "@types/node": "catalog:types",
