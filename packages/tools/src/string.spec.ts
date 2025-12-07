@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { camelTokeba, getFileNameByPath, kebaToCamel } from './string'
+import { camelTokeba, getFileNameByPath, kebaToCamel } from './string.js'
 
 it('utils.string', () => {
   expect(getFileNameByPath('图片')).toBe('图片')
