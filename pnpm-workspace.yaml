@@ -1,4 +1,7 @@
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - tailwind-merge
+
 shellEmulator: true
 packages:
   - apps/*
@@ -8,9 +11,10 @@ catalogMode: prefer
 
 catalogs:
   dev:
-    '@modelcontextprotocol/inspector': ^0.17.2
+    '@modelcontextprotocol/inspector': ^0.17.5
     '@vitejs/plugin-vue': ^6.0.1
     '@vue/tsconfig': ^0.8.1
+    npm-run-all2: ^8.0.4
     tsx: ^4.20.6
     turbo: ^2.6.2
     typescript: ~5.9.3

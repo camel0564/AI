@@ -21,9 +21,11 @@
     "@antfu/eslint-config": "catalog:dev",
     "@types/node": "catalog:types",
     "eslint": "catalog:dev",
+    "npm-run-all2": "catalog:dev",
     "tsx": "catalog:dev",
     "turbo": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:test"
+
   }
 }

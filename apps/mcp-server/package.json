@@ -7,7 +7,9 @@
   "module": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "dev": "tsx ./src/index.ts",
+    "dev": "npm-run-all --parallel --print-label mcp:dev mcp:debug",
+    "mcp:dev": "tsx ./src/index.ts",
+    "mcp:debug": "mcp-inspector http://localhost:3127/mcp",
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "test": "vitest",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@ai/typescript-config": "workspace:*",
+    "@modelcontextprotocol/inspector": "catalog:dev",
     "@types/express": "catalog:types",
     "@types/node": "catalog:types",
     "tsx": "catalog:dev",

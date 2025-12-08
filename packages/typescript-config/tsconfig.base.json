@@ -14,5 +14,5 @@
     "skipLibCheck": true // 跳过三方库类型检查，提高编译速度
   },
   // "include": ["src/**/*"], // 禁止设置请去项目中配置
-  "exclude": ["node_modules", "src/**/*.spec.ts"]
+  "exclude": ["node_modules", "src/**/*.spec.ts"] // 禁止设置请去项目中配置
 }
