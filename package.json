@@ -22,7 +22,7 @@
     "@types/node": "catalog:types",
     "eslint": "catalog:dev",
     "npm-run-all2": "catalog:dev",
-    "tsc-alias": "catalog:dev",
+    "pkgroll": "catalog:dev",
     "tsx": "catalog:dev",
     "turbo": "catalog:dev",
     "typescript": "catalog:dev",

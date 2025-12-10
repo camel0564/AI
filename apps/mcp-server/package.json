@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "port": 3127,
   "description": "a mcp server",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "types": "src/index.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "scripts": {
     "dev": "npm-run-all --parallel --print-label mcp:dev mcp:debug",
     "mcp:dev": "tsx ./src/index.ts",
@@ -14,7 +17,7 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "test": "vitest",
-    "build": "tsc",
+    "build": "pkgroll --clean-dist",
     "serve": "chmod 755 dist/index.js && node ./dist/index.js"
   },
   "dependencies": {

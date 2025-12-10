@@ -1,6 +1,6 @@
 import process from 'node:process'
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp'
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
 import express from 'express'
 import { registerReviewCodePrompt, registerTeamGreetingPrompt } from './prompts/index'
 import { registerGithubResource, registerHolidaysResource, registerUserProfileResource } from './resource/index'

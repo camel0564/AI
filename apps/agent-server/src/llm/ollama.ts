@@ -2,7 +2,7 @@
  * OpenAI API 兼容模型
  */
 
-import type { Message as ClientMessage } from 'ollama/src/interfaces'
+import type { Message as ClientMessage } from 'ollama'
 import type { ChatConfig, LLMConfig } from './llm.types'
 import process from 'node:process'
 import { isString } from '@ai/tools'

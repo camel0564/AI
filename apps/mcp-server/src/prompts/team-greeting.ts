@@ -1,5 +1,5 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp'
-import { completable } from '@modelcontextprotocol/sdk/server/completable'
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { completable } from '@modelcontextprotocol/sdk/server/completable.js'
 import { z } from 'zod'
 
 /**

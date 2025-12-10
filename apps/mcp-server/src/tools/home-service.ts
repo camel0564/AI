@@ -1,4 +1,4 @@
-import type { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp'
+import type { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 
 const servicesDB: HomeService[] = [
