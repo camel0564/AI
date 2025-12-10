@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { getNumberInteger, isNumeric, numberClamp, numberClamp2 } from './number.js'
+import { getNumberInteger, isNumeric, numberClamp, numberClamp2 } from './number'
 
 // case转化
 it('utils.case', () => {

@@ -1,2 +1,2 @@
-export * from './review-code.js'
-export * from './team-greeting.js'
+export * from './review-code'
+export * from './team-greeting'

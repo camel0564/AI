@@ -3,4 +3,4 @@
  */
 
 // 导出类型定义
-export * from './mcp.types.js'
+export * from './mcp.types'

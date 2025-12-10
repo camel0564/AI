@@ -1,5 +1,5 @@
-import type { LLMConfig } from '@/llm/index.js'
-import type { McpConfig } from '@/mcp/index.js'
+import type { LLMConfig } from '@/llm/index'
+import type { McpConfig } from '@/mcp/index'
 
 /** Agent 配置对象类型定义 */
 export interface AgentConfig {

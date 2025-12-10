@@ -1,6 +1,6 @@
-import type { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js'
+import type { McpServer, ToolCallback } from '@modelcontextprotocol/sdk/server/mcp'
 import { z } from 'zod'
-import { getHomeServiceByIdApi } from './home-service.js'
+import { getHomeServiceByIdApi } from './home-service'
 
 // 订单状态枚举
 enum OrderStatus {

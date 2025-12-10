@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { LLM } from './ollama.js'
+import { LLM } from './ollama'
 
 function testLlm() {
   const llmChat = new LLM({

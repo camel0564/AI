@@ -1,3 +1,3 @@
-export * from './github.js'
-export * from './holidays.js'
-export * from './user-profile.js'
+export * from './github'
+export * from './holidays'
+export * from './user-profile'

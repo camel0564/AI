@@ -2,10 +2,10 @@
  * OpenAI API 兼容模型
  */
 
-import type { ChatConfig, LLMConfig } from './llm.types.js'
+import type { ChatConfig, LLMConfig } from './llm.types'
 import process from 'node:process'
 import Client from 'openai'
-import { ChatConfigSchema, LLMConfigSchema } from './llm.types.js'
+import { ChatConfigSchema, LLMConfigSchema } from './llm.types'
 
 export class LLM {
   /** OpenAI客户端 */

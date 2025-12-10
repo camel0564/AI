@@ -1,9 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "esnext", // 决定编译后 JS 代码的[语法版本]; 例如: const,箭头函数等
-    "module": "nodenext", // 决定编译后 JS 代码的 [模块系统格式]; nodenext同时兼容 CommonJS 和 ESModule
-    "moduleResolution": "nodenext", // 决定 TS 编译器[如何找到import模块] bundler 无需.js后缀名称,需要配置 `tsc-alias` 在build后补全 .js 后缀
+    "target": "esnext", // 编译后js代码; 例如: const,箭头函数等
+    "moduleDetection": "force", // 强制将所有文件视为模块
+    "module": "Preserve", // 编译后js模块, 保持原样,用其他如esbuild工具进行建构
+    "moduleResolution": "bundler", // 编译时查找js模块的方式;
+    "resolveJsonModule": true, // 允许导入 JSON 文件
+    "allowJs": true, // 允许导入 JS 文件
     // "baseUrl": ".", 必须在当前项目中设置
     // "outDir": "dist", // 必须在当前项目中设置; 输出目录
     // "rootDir": "src", // 必须在当前项目中设置;
@@ -11,9 +14,9 @@
     "declaration": true, // 生成 .d.ts 类型声明文件
     "esModuleInterop": true, // 兼容 CommonJS 语法的三方库
     "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
+    "isolatedModules": true, // 每个文件都是一个独立的模块，不依赖其他文件
     "skipLibCheck": true // 跳过三方库类型检查，提高编译速度
   }
-  // "tsc-alias": { "verbose": true, "resolveFullPaths": true } // 必须在当前项目中设置
   // "include": ["src/**/*"], // 必须在当前项目中设置
   // "exclude": ["node_modules", "src/**/*.test.ts"] // 必须在当前项目中设置
 }

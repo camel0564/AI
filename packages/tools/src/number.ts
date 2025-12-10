@@ -1,4 +1,4 @@
-import { isNumerLike } from './type-guard.js'
+import { isNumerLike } from './type-guard'
 
 /**
  * 是否为数字或字符串形式的数字

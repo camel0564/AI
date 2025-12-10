@@ -1,5 +1,5 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp'
+import { ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp'
 
 /** 注册 用户信息 resource */
 export function registerUserProfileResource(server: McpServer) {

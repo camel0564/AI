@@ -1,15 +1,4 @@
-import { isRecord, isString } from './type-guard.js'
-
-// const apiURL = new URL('https://fanyi-api.baidu.com/api/trans/vip/translate');
-// apiURL.search = new URLSearchParams(params).toString();
-// const url = apiURL.toString();
-// const res = await fetch(url);
-// const data: any = await res.json();
-
-// export const login = (body: LoginReq) => $request<LoginRes>(Api.login, {
-//   method: 'POST',
-//   body,
-// })
+import { isRecord, isString } from './type-guard'
 
 export type AFetchMethod = 'get' | 'GET' | 'delete' | 'DELETE' | 'head' | 'HEAD' | 'options' | 'OPTIONS' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH' | 'purge' | 'PURGE' | 'link' | 'LINK' | 'unlink' | 'UNLINK'
 

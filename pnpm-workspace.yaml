@@ -22,6 +22,7 @@ catalogs:
     vue-tsc: ^3.1.4
     eslint: ^9.39.1
     '@antfu/eslint-config': ^6.4.1
+    tsc-alias: ^1.8.16
   prod:
     '@modelcontextprotocol/sdk': ^1.23.0
     express: ^5.1.0

@@ -1,5 +1,5 @@
 {
-  "extends": "@ai/typescript-config/tsconfig.base.json",
+  "extends": "@ai/typescript-config/tsconfig.esbuild.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",

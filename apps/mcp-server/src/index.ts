@@ -1,11 +1,11 @@
 import process from 'node:process'
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp'
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp'
 import express from 'express'
-import { registerReviewCodePrompt, registerTeamGreetingPrompt } from './prompts/index.js'
-import { registerGithubResource, registerHolidaysResource, registerUserProfileResource } from './resource/index.js'
-import { registerHomeServiceTool, registerOrderTool, registerWeatherTool } from './tools/index.js'
-import { AppInfo } from './utils/index.js'
+import { registerReviewCodePrompt, registerTeamGreetingPrompt } from './prompts/index'
+import { registerGithubResource, registerHolidaysResource, registerUserProfileResource } from './resource/index'
+import { registerHomeServiceTool, registerOrderTool, registerWeatherTool } from './tools/index'
+import { AppInfo } from './utils/index'
 
 const AppName = AppInfo.name
 

@@ -2,12 +2,12 @@
  * OpenAI API 兼容模型
  */
 
-import type { Message as ClientMessage } from 'ollama/src/interfaces.js'
-import type { ChatConfig, LLMConfig } from './llm.types.js'
+import type { Message as ClientMessage } from 'ollama/src/interfaces'
+import type { ChatConfig, LLMConfig } from './llm.types'
 import process from 'node:process'
 import { isString } from '@ai/tools'
 import { Ollama as Client } from 'ollama'
-import { ChatConfigSchema, LLMConfigSchema } from './llm.types.js'
+import { ChatConfigSchema, LLMConfigSchema } from './llm.types'
 
 export class LLM {
   /** OpenAI客户端 */
@@ -55,7 +55,11 @@ export class LLM {
     })
     console.log('🚀 response:', response)
     for await (const part of response) {
-      process.stdout.write(part.message.content || part.message.thinking || '...')
+      const tinking = part.message.thinking || ''
+      const answer = part.message.content || ''
+      console.log('🚀 tinking:', tinking)
+      console.log('🚀 tinking:', answer)
+      process.stdout.write(tinking || answer)
     }
   }
 

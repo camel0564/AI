@@ -1,10 +1,9 @@
 // 网络请求
-export * from './afetch.js'
-// 常用公共函数
-export * from './common.js'
+export * from './afetch'
+export * from './common'
 // 数字
-export * from './number.js'
+export * from './number'
 // string
-export * from './string.js'
+export * from './string'
 // 类型守护
-export * from './type-guard.js'
+export * from './type-guard'
