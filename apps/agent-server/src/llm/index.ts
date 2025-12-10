@@ -5,5 +5,5 @@
 // 导出类型定义
 export * from './llm.types.js'
 
-// 导出OpenAI兼容实现
-export * from './oai.js'
+// 导出兼容OpenAI的llm模型
+export * from './openai.js'

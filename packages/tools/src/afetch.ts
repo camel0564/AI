@@ -1,4 +1,4 @@
-import { isRecord, isString } from './type-guard'
+import { isRecord, isString } from './type-guard.js'
 
 // const apiURL = new URL('https://fanyi-api.baidu.com/api/trans/vip/translate');
 // apiURL.search = new URLSearchParams(params).toString();

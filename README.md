@@ -11,8 +11,8 @@
 ├─ README.md
 └─ apps/              # Monorepo app
    ├─ agent-client/       # 智能体客户端
+   ├─ agent-server/       # 智能体服务端
    ├─ mcp-client/         # MCP客户端
-   ├─ mcp-debug/          # MCP调试工具
    └─ mcp-server/         # MCP服务端
 ```
 

@@ -23,6 +23,6 @@ ts 配置文件
     "outDir": "dist",
   },
   "include": [ "src/**/*" ],
-  "exclude": ["node_modules", "src/**/*.spec.ts"]
+  "exclude": ["node_modules", "src/**/*.test.ts"]
 }
 ```

@@ -2,9 +2,10 @@
   "name": "@ai/agent-client",
   "type": "module",
   "version": "0.0.0",
+  "port": 6110,
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port $(npm pkg get port)",
     "type-check": "vue-tsc --build",
     "lint": "eslint --fix",
     "test": "vitest",

@@ -1,103 +1,70 @@
-/**
- * LLM模块的消息类型定义
- */
+import { z } from 'zod'
 
-/**
- * 消息角色列表
- */
-export const ROLES = ['system', 'user', 'assistant', 'function'] as const
+/** 模型调优参数 */
+const ModelSettingsSchema = z.object({
+  temperature: z.number().min(0).max(2).default(0.7).optional().describe('温度参数，控制输出随机性'),
+  topP: z.number().min(0).max(1).default(0.95).optional().describe('核采样参数，控制输出多样性'),
+  maxTokens: z.number().int().min(10).default(2000).optional().describe('最大输出 token 数'),
+}).catchall(z.any().describe('扩展其他模型调优参数')) // [key: string]: any 对应的 Zod 写法
 
-/**
- * 消息角色类型
- * 定义了消息的不同角色类型。
- * @desc `user` 用户发送的消息。
- * @desc `assistant` 助手（大模型）回答的消息。
- * @desc `system` 系统消息，通常用于设定助手的行为 `RAG` (权重大于用户消息,用于限制或补充用户消息)
- * @desc `function` 工具（函数）调用的结果。即: `MCP` tools()
- */
-export type Role = typeof ROLES[number]
+/** LLM 配置 */
+export const LLMConfigSchema = z.object({
+  model: z.string().min(1).describe('模型名称（必填，非空字符串，示例：qwen3:8b）'),
+  baseURL: z.url().describe('模型服务器URL eg: http://localhost:11434/v1'),
+  apiKey: z.string().default('EMPTY').optional().describe('API密钥 环境变量优先，本地模型可省略'),
+  modelType: z.enum(['qwen', 'oai']).default('qwen').optional().describe('模型类型'),
+  modelSettings: ModelSettingsSchema.optional().describe('模型调优参数配置'),
+})
 
-/** 定义消息内容中的不同类型项 */
-export interface MsgContent {
-  /** 文本内容 */
-  text?: string
-  /** 图片内容，通常是base64编码的字符串 */
-  image?: string
-  /** 文件内容，通常是base64编码的字符串 */
-  file?: string
-  /** 音频内容，通常是base64编码的字符串或包含音频信息的记录 */
-  audio?: string | Record<string, any>
-  /** 视频内容，通常是base64编码的字符串或包含视频信息的数组 */
-  video?: string | Array<any>
-}
+/** LLM 配置 */
+export type LLMConfig = z.infer<typeof LLMConfigSchema>
+/** 模型调优参数 */
+export type ModelSettings = z.infer<typeof ModelSettingsSchema>
 
-/** 模型函数调用 */
-export interface FunctionCall {
-  /** 函数名称 */
-  name: string
-  /** 函数参数 */
-  arguments: string
-  /** 函数描述 */
-  description: string
-}
+/** 消息 */
+export const ChatMsgSchema = z.object({
+  /**
+   * 消息的不同角色类型
+   * @desc `user` 用户发送的消息。
+   * @desc `assistant` 助手（大模型）回答的消息。
+   * @desc `system` 用于告知模型“它是谁”以及“应如何回应”的系统提示词 `RAG` (权重大于用户消息,用于限制或补充用户消息)
+   * @desc `function` 工具（函数）调用的结果。即: `MCP` tools()
+   * @desc `developer` 和 `system` 类似，都是系统提示词，但是 `developer` 是开发者发送的消息。
+   */
+  role: z.enum(['system', 'developer', 'user', 'assistant', 'function']).describe('消息角色'),
+  /** 消息内容 */
+  content: z.union([z.string(), z.array(z.object({
+    text: z.string().optional().describe('文本'),
+    image: z.string().optional().describe('图片'),
+    file: z.string().optional().describe('文件'),
+    audio: z.string().optional().optional().describe('音频'),
+    video: z.string().optional().optional().describe('视频'),
+  }))]),
+  /** 会话参与人的名称, 让模型知道是谁在发送消息 */
+  name: z.string().optional(),
+})
 
 /** 消息接口 */
-export interface ChatMessage {
-  /** 消息角色 */
-  role: Role
-  /** 消息内容 */
-  content: string | MsgContent[]
-  /**
-   * 推理内容
-   *
-   * 用于存储模型的推理过程内容。这个字段允许将模型的思考过程与最终的回答内容分开。
-   * 这对于理解和调试模型的行为非常有用，尤其是在复杂任务中。
-   * 当使用支持该字段的新版 Qwen 模型（如 QwQ-32B）时，模型会自动填充此字段。
-   * 在前端展示时，可以通过特殊标记（如 `[THINK]`）将推理内容与回答内容区分开来。
-   */
-  reasoning_content?: string | MsgContent[]
-  /** 消息名称 */
-  name?: string
-  /** 函数调用 */
-  function_call?: FunctionCall
-  /** 额外信息 */
-  extra?: Record<string, any>
-}
+export type ChatMsg = z.infer<typeof ChatMsgSchema>
 
-/**
- * 聊天参数接口
- */
-export interface ChatParams {
-  /** 消息列表 */
-  messages: ChatMessage[]
-  /** 模型名称 */
-  model: string
-  /** 是否流式输出 */
-  stream?: boolean
-  /** 温度参数，控制生成的随机性 */
-  temperature?: number
-  /** 最大令牌数，限制生成的响应长度 */
-  max_tokens?: number
-  [key: string]: any
-}
+const FunctionCallSchema = z.object({
+  /** 函数名称 */
+  name: z.string().min(1).describe('函数名称（必填，非空字符串，示例：get_weather）'),
+  /** 函数参数 */
+  arguments: z.string().min(1).describe('函数参数（必填，非空字符串，示例：{"location": "北京"}）'),
+  /** 函数描述 */
+  description: z.string().min(1).describe('函数描述（必填，非空字符串，示例：获取指定位置的天气信息）'),
+})
 
-// LLM配置类型
-export interface LLMConfig {
-  /** 模型名称 eg: qwen3:8b */
-  model: string
-  /** 模型服务器URL eg: http://localhost:11434/v1 */
-  baseURL?: string
-  /** 模型类型 oai: openAI兼容的模型 */
-  modelType?: 'oai'
-  /** API密钥 环境变量:OPENAI_API_KEY 本地模型一般无需设置 */
-  apiKey?: string
-}
+/** 模型函数调用 */
+export type FunctionCall = z.infer<typeof FunctionCallSchema>
 
-// 生成配置类型
-export interface GenerateConfig {
-  lang?: 'en' | 'zh'
-  max_input_tokens?: number
-  stop?: string[]
-  temperature?: number
-  [key: string]: any
-}
+export const ChatConfigSchema = z.object({
+  /** 消息 */
+  messages: z.array(ChatMsgSchema).min(1).describe('消息列表（必填，至少包含一条消息）'),
+  /** 模型可调用的函数列表 */
+  functions: z.array(FunctionCallSchema).optional().describe('模型可调用的函数列表'),
+})
+
+/** 聊天配置 */
+export type ChatConfig = z.infer<typeof ChatConfigSchema>

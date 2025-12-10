@@ -12,7 +12,7 @@
     "esModuleInterop": true, // 兼容 CommonJS 语法的三方库
     "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
     "skipLibCheck": true // 跳过三方库类型检查，提高编译速度
-  },
+  }
   // "include": ["src/**/*"], // 禁止设置请去项目中配置
-  "exclude": ["node_modules", "src/**/*.spec.ts"] // 禁止设置请去项目中配置
+  // "exclude": ["node_modules", "src/**/*.test.ts"] // 禁止设置请去项目中配置
 }

@@ -2,6 +2,7 @@
   "name": "@ai/mcp-server",
   "type": "module",
   "version": "1.0.0",
+  "port": 3127,
   "description": "a mcp server",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -9,15 +10,15 @@
   "scripts": {
     "dev": "npm-run-all --parallel --print-label mcp:dev mcp:debug",
     "mcp:dev": "tsx ./src/index.ts",
-    "mcp:debug": "mcp-inspector http://localhost:3127/mcp",
+    "mcp:debug": "mcp-inspector http://localhost:$(npm pkg get port)/mcp",
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
     "test": "vitest",
     "build": "tsc",
-    "serve": "chmod 755 dist/index.js && node ./dist/index.js",
-    "kill": "kill -9 $(lsof -ti:3127)"
+    "serve": "chmod 755 dist/index.js && node ./dist/index.js"
   },
   "dependencies": {
+    "@ai/tools": "workspace:*",
     "@modelcontextprotocol/sdk": "catalog:prod",
     "express": "catalog:prod",
     "zod": "catalog:prod"

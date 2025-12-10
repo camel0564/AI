@@ -1,7 +1,8 @@
 {
-  "name": "@ai/tools",
+  "name": "@ai/agent-server",
   "type": "module",
   "version": "1.0.0",
+  "port": 6120,
   "description": "",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -13,8 +14,13 @@
     "test": "vitest",
     "build": "tsc"
   },
+  "dependencies": {
+    "ollama": "catalog:prod",
+    "openai": "catalog:prod",
+    "zod": "catalog:prod"
+  },
   "devDependencies": {
-    "@ai/typescript-config": "workspace:*",
-    "vitest": "catalog:test"
+    "@ai/tools": "workspace:*",
+    "@ai/typescript-config": "workspace:*"
   }
 }

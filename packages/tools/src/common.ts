@@ -4,7 +4,7 @@
  */
 export const sleep = (timeout: number) => new Promise(resolve => setTimeout(resolve, timeout))
 
-/** 声明 node process 类型，避免类型错误 */
+/** 声明 node process 类型，避免浏览器端环境类型错误 */
 declare const process: any
 /** 安全地获取环境变量，如果不可用则使用默认值 */
 function getEnv(key?: string) {

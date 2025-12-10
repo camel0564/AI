@@ -46,6 +46,12 @@ catalogs:
     express:
       specifier: ^5.1.0
       version: 5.2.1
+    ollama:
+      specifier: ^0.6.3
+      version: 0.6.3
+    openai:
+      specifier: ^6.10.0
+      version: 6.10.0
     vue:
       specifier: ^3.5.24
       version: 3.5.25
@@ -121,8 +127,30 @@ importers:
         specifier: catalog:dev
         version: 3.1.5(typescript@5.9.3)
 
+  apps/agent-server:
+    dependencies:
+      ollama:
+        specifier: catalog:prod
+        version: 0.6.3
+      openai:
+        specifier: catalog:prod
+        version: 6.10.0(ws@8.18.3)(zod@4.1.13)
+      zod:
+        specifier: catalog:prod
+        version: 4.1.13
+    devDependencies:
+      '@ai/tools':
+        specifier: workspace:*
+        version: link:../../packages/tools
+      '@ai/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+
   apps/mcp-server:
     dependencies:
+      '@ai/tools':
+        specifier: workspace:*
+        version: link:../../packages/tools
       '@modelcontextprotocol/sdk':
         specifier: catalog:prod
         version: 1.24.2(zod@4.1.13)
@@ -160,6 +188,9 @@ importers:
       '@ai/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      vitest:
+        specifier: catalog:test
+        version: 4.0.15(@types/node@24.10.1)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/typescript-config: {}
 
@@ -2607,6 +2638,9 @@ packages:
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
 
+  ollama@0.6.3:
+    resolution: {integrity: sha512-KEWEhIqE5wtfzEIZbDCLH51VFZ6Z3ZSa6sIOg/E/tBV8S51flyqBOXi+bRxlOYKDf8i327zG9eSTb8IJxvm3Zg==}
+
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
     engines: {node: '>= 0.8'}
@@ -2617,6 +2651,18 @@ packages:
   open@10.2.0:
     resolution: {integrity: sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==}
     engines: {node: '>=18'}
+
+  openai@6.10.0:
+    resolution: {integrity: sha512-ITxOGo7rO3XRMiKA5l7tQ43iNNu+iXGFAcf2t+aWVzzqRaS0i7m1K2BhxNdaveB+5eENhO0VY1FkiZzhBk4v3A==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.25 || ^4.0
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -3246,6 +3292,9 @@ packages:
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
+
+  whatwg-fetch@3.6.20:
+    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -5857,6 +5906,10 @@ snapshots:
 
   obug@2.1.1: {}
 
+  ollama@0.6.3:
+    dependencies:
+      whatwg-fetch: 3.6.20
+
   on-finished@2.4.1:
     dependencies:
       ee-first: 1.1.1
@@ -5871,6 +5924,11 @@ snapshots:
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
       wsl-utils: 0.1.0
+
+  openai@6.10.0(ws@8.18.3)(zod@4.1.13):
+    optionalDependencies:
+      ws: 8.18.3
+      zod: 4.1.13
 
   optionator@0.9.4:
     dependencies:
@@ -6474,6 +6532,8 @@ snapshots:
       typescript: 5.9.3
 
   web-streams-polyfill@3.3.3: {}
+
+  whatwg-fetch@3.6.20: {}
 
   which@2.0.2:
     dependencies:
