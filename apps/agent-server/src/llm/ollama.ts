@@ -48,19 +48,37 @@ export class LLM {
     const model = this.configs.model
     const msgs = this.formatMessages(messages)
     console.log('🚀 msgs:', model, msgs)
-    const response = await this.client.chat({
+    const stream = await this.client.chat({
       model,
       messages: msgs,
+      tools: functions,
       stream: true,
     })
-    console.log('🚀 response:', response)
-    for await (const part of response) {
-      const tinking = part.message.thinking || ''
-      const answer = part.message.content || ''
-      console.log('🚀 tinking:', tinking)
-      console.log('🚀 tinking:', answer)
-      process.stdout.write(tinking || answer)
+    let inThinking = false
+    let content = ''
+    let thinking = ''
+
+    for await (const chunk of stream) {
+      if (chunk.message.thinking) {
+        if (!inThinking) {
+          inThinking = true
+          process.stdout.write('[Thinking]:\n')
+        }
+        process.stdout.write(chunk.message.thinking)
+        thinking += chunk.message.thinking
+      }
+      else if (chunk.message.content) {
+        if (inThinking) {
+          inThinking = false
+          process.stdout.write('\n\n[Answer]:\n')
+        }
+        process.stdout.write(chunk.message.content)
+        content += chunk.message.content
+      }
     }
+
+    // 合并思考和回答,用于下一次请求 例如: 交给其他类型的agent处理
+    const new_messages = [{ role: 'assistant', thinking, content }]
   }
 
   formatMessages(messages: ChatConfig['messages']): ClientMessage[] {
