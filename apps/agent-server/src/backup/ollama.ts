@@ -44,15 +44,17 @@ export class LLM {
 
   /** 调用OpenAI API 聊天接口 */
   async chat(chatConf: ChatConfig) {
-    const { messages, functions } = ChatConfigSchema.parse(chatConf)
     const model = this.configs.model
-    const msgs = this.formatMessages(messages)
-    console.log('🚀 msgs:', model, msgs)
+    const cfgs = ChatConfigSchema.parse(chatConf)
+    const msgs = this.formatMessages(cfgs.messages)
+    console.log('🚀 chat 配置:', { model, cfgs, msgs })
+
     const stream = await this.client.chat({
       model,
       messages: msgs,
-      tools: functions,
-      stream: true,
+      tools: cfgs.functions,
+      stream: false,
+      think: cfgs.think,
     })
     let inThinking = false
     let content = ''
@@ -76,6 +78,8 @@ export class LLM {
         content += chunk.message.content
       }
     }
+    // 打印结束符防止后续输出被覆盖
+    process.stdout.write('\n')
 
     // 合并思考和回答,用于下一次请求 例如: 交给其他类型的agent处理
     const new_messages = [{ role: 'assistant', thinking, content }]

@@ -1,25 +1,46 @@
 import { z } from 'zod'
 
-/** 模型调优参数 */
-const ModelSettingsSchema = z.object({
-  temperature: z.number().min(0).max(2).default(0.7).optional().describe('温度参数，控制输出随机性'),
-  topP: z.number().min(0).max(1).default(0.95).optional().describe('核采样参数，控制输出多样性'),
-  maxTokens: z.number().int().min(10).default(2000).optional().describe('最大输出 token 数'),
+/**
+ * 模型调优参数
+ * @see https://zhuanlan.zhihu.com/p/24484122371
+ * @see https://finisky.github.io/illustrated-decoding-strategies/
+ */
+const ModelConfigSchema = z.object({
+  /**
+   * 控制下一个 token 的概率大小
+   * @example 医疗诊断回答：0.1-0.5（需严谨性）
+   * @example 诗歌创作：0.7-1.0（鼓励创意）
+   */
+  temperature: z.number().min(0).max(2).default(0.7).optional().describe('温度'),
+  /**
+   * 控制下一个 token 的概率大小的另一种算法; 参考 `temperature`
+   */
+  top_p: z.number().min(0).max(1).default(0.75).optional().describe('核采样(核: 即核心token)'),
+  /** 自动调整 或 null */
+  max_tokens: z.number().int().min(10).nullable().default(null).optional().describe('最大输出 token 数'),
 }).catchall(z.any().describe('扩展其他模型调优参数')) // [key: string]: any 对应的 Zod 写法
 
 /** LLM 配置 */
 export const LLMConfigSchema = z.object({
-  model: z.string().min(1).describe('模型名称（必填，非空字符串，示例：qwen3:8b）'),
   baseURL: z.url().describe('模型服务器URL eg: http://localhost:11434/v1'),
   apiKey: z.string().default('EMPTY').optional().describe('API密钥 环境变量优先，本地模型可省略'),
-  modelType: z.enum(['qwen', 'oai']).default('qwen').optional().describe('模型类型'),
-  modelSettings: ModelSettingsSchema.optional().describe('模型调优参数配置'),
 })
 
 /** LLM 配置 */
 export type LLMConfig = z.infer<typeof LLMConfigSchema>
 /** 模型调优参数 */
-export type ModelSettings = z.infer<typeof ModelSettingsSchema>
+export type ModelConfig = z.infer<typeof ModelConfigSchema>
+
+/** 多媒体消息内容列表 */
+const MediaMsg = z.array(z.object({
+  type: z.union([
+    z.literal('text'),
+    z.literal('image_url'),
+    z.literal('input_audio'),
+    z.custom<string & {}>(val => typeof val === 'string'),
+  ]),
+  text: z.string().optional(),
+}).catchall(z.any().describe('扩展其他模型调优参数')))
 
 /** 消息 */
 export const ChatMsgSchema = z.object({
@@ -27,19 +48,12 @@ export const ChatMsgSchema = z.object({
    * 消息的不同角色类型
    * @desc `user` 用户发送的消息。
    * @desc `assistant` 助手（大模型）回答的消息。
-   * @desc `system` 用于告知模型“它是谁”以及“应如何回应”的系统提示词 `RAG` (权重大于用户消息,用于限制或补充用户消息)
+   * @desc `system` `仅支持文本`; 用于告知模型“它是谁”以及“应如何回应”的系统提示词 (权重大于用户消息) o1 模型后使用 developer 替代 system 角色
    * @desc `function` 工具（函数）调用的结果。即: `MCP` tools()
-   * @desc `developer` 和 `system` 类似，都是系统提示词，但是 `developer` 是开发者发送的消息。
    */
   role: z.enum(['system', 'developer', 'user', 'assistant', 'function']).describe('消息角色'),
-  /** 消息内容 */
-  content: z.union([z.string(), z.array(z.object({
-    text: z.string().optional().describe('文本'),
-    image: z.string().optional().describe('图片'),
-    file: z.string().optional().describe('文件'),
-    audio: z.string().optional().optional().describe('音频'),
-    video: z.string().optional().optional().describe('视频'),
-  }))]),
+  /** 消息内容 文字 或 多媒体 */
+  content: z.union([z.string(), MediaMsg]),
   /** 会话参与人的名称, 让模型知道是谁在发送消息 */
   name: z.string().optional(),
 })
@@ -47,24 +61,32 @@ export const ChatMsgSchema = z.object({
 /** 消息接口 */
 export type ChatMsg = z.infer<typeof ChatMsgSchema>
 
-const FunctionCallSchema = z.object({
+const FunctionsSchema = z.object({
   /** 函数名称 */
   name: z.string().min(1).describe('函数名称（必填，非空字符串，示例：get_weather）'),
-  /** 函数参数 */
-  arguments: z.string().min(1).describe('函数参数（必填，非空字符串，示例：{"location": "北京"}）'),
+  /** 函数参数 （JSON Schema 格式） */
+  parameters: z.any().describe('函数参数（必填，非空字符串，示例：{"location": "北京"}）'),
   /** 函数描述 */
-  description: z.string().min(1).describe('函数描述（必填，非空字符串，示例：获取指定位置的天气信息）'),
+  description: z.string().min(1).optional().describe('函数描述（必填，非空字符串，示例：获取指定位置的天气信息）'),
 })
 
 /** 模型函数调用 */
-export type FunctionCall = z.infer<typeof FunctionCallSchema>
+export type Functions = z.infer<typeof FunctionsSchema>
 
-export const ChatConfigSchema = z.object({
-  /** 消息 */
-  messages: z.array(ChatMsgSchema).min(1).describe('消息列表（必填，至少包含一条消息）'),
+export const ChatRequestSchema = z.object({
+  /** 模型 必填 */
+  model: z.string().describe('模型名称（必填，非空字符串，示例：qwen3:8b）'),
+  /** 消息 必填 */
+  messages: z.array(ChatMsgSchema).describe('消息列表（必填，至少包含一条消息）'),
   /** 模型可调用的函数列表 */
-  functions: z.array(FunctionCallSchema).optional().describe('模型可调用的函数列表'),
+  functions: z.array(FunctionsSchema).optional().describe('模型可调用的函数列表'),
+  /** 模型参数 */
+  modelConfig: ModelConfigSchema.optional().describe('模型调优参数配置'),
+  /** 是否开启深度思考 */
+  think: z.boolean().default(false).optional().describe('是否开启深度思考'),
+  /** 是否流式输出 */
+  stream: z.boolean().default(false).optional().describe('是否流式输出'),
 })
 
-/** 聊天配置 */
-export type ChatConfig = z.infer<typeof ChatConfigSchema>
+/** 聊天请求参数 */
+export type ChatRequest = z.infer<typeof ChatRequestSchema>

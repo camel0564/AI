@@ -10,7 +10,7 @@ function testLlm() {
       { role: 'system', content: '用中文回答' },
       { role: 'system', content: '像一个海盗一样回答问题。' },
       { role: 'system', content: '回答中添加一些emoji表情' },
-      { role: 'user', content: '在 JavaScript 中，分号是可选的吗？' },
+      { role: 'user', content: '1+1=？' },
     ],
   })
 }

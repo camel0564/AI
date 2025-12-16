@@ -2,8 +2,11 @@ import { isRecord, isString } from './type-guard'
 
 export type AFetchMethod = 'get' | 'GET' | 'delete' | 'DELETE' | 'head' | 'HEAD' | 'options' | 'OPTIONS' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH' | 'purge' | 'PURGE' | 'link' | 'LINK' | 'unlink' | 'UNLINK'
 
+/** fetch 参数 */
 export interface AFetchOptions extends RequestInit {
+  /** 基础 URL */
   baseURL?: string
+  /** 请求方法 */
   method?: 'get' | 'post' | 'delete' | 'put' | 'head' | 'options' | AFetchMethod
   /** 查询字符串 */
   query?: Record<string, any> | string | URLSearchParams | null
@@ -20,7 +23,6 @@ export interface AFetchOptions extends RequestInit {
    * @description `query` 处理为 URLSearchParams(data)
    */
   dataType?: 'json' | 'form-data' | 'query'
-
   /** 开启调试模式 开启后会打印请求信息 */
   debug?: boolean
 }
