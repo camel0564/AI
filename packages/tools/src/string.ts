@@ -1,16 +1,4 @@
 /**
- * 从url中 获取文件名称
- */
-export function getFileNameByPath(filePath = '') {
-  if (!filePath)
-    return ''
-
-  filePath = filePath.includes('/') ? filePath : `/${filePath}`
-  const mats = filePath.match(/\/([^/?#]+)(\?|#|$)/)
-  return mats?.[1] || ''
-}
-
-/**
  * 中划线转驼峰
  * @param name 需要转化的首字母
  * @param firstUpper 首字母是否大写

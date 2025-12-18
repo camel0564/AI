@@ -1,7 +1,8 @@
-import type { ChatRequest, LLMConfig } from './llm.types'
-import process from 'node:process'
-import { isString } from '@ai/tools'
+import type { AFetch } from '@ai/tools'
+import type { ChatRequest, ChatResponse, LLMConfig } from './llm.types'
+import { afetchBase } from '@ai/tools'
 import { ChatRequestSchema, LLMConfigSchema } from './llm.types'
+import { AsyncIteratorCancel, formatMessages, streamToJson } from './llm.util'
 
 /**
  * 对兼容 openai v1接口的LLM封装类
@@ -11,12 +12,15 @@ import { ChatRequestSchema, LLMConfigSchema } from './llm.types'
 export class LLM {
   /** LLM配置 */
   protected configs: LLMConfig
+  /** HTTP请求 */
+  protected fetch: AFetch
   /** 当前正在进行的流式请求列表，用于管理和中止请求 */
-  protected streamingRequests: Map<string, AbortController> = new Map()
+  protected streamingRequests: Set<AsyncIteratorCancel<object>> = new Set()
 
   constructor(llmConf: LLMConfig) {
     try {
       this.configs = LLMConfigSchema.parse(llmConf)
+      this.fetch = afetchBase({ baseURL: this.configs.baseURL, debug: llmConf.debug })
     }
     catch (error) {
       console.error('🚀 LLMConfig 参数错误:', error)
@@ -24,69 +28,50 @@ export class LLM {
     }
   }
 
+  /** 重载1: 流式响应 */
+  chat(
+    request: ChatRequest & { stream: true },
+  ): Promise<AsyncIteratorCancel<ChatResponse>>
+  /** 重载2: 非流式响应 */
+  chat(request: ChatRequest & { stream?: false }): Promise<ChatResponse>
+
   /** 调用OpenAI API 聊天接口 */
   async chat(request: ChatRequest) {
     /** 请求参数 */
     const querys = ChatRequestSchema.parse(request)
-    const messages = this.formatMessages(querys)
-    console.log('🚀 chat 请求参数:', { querys, messages })
-
-    // const stream = await this.client.chat({
-    //   ...querys,
-    //   messages,
-    //   tools: querys.functions,
-    //   stream: false,
-    //   think: querys.think,
-    // })
-    // let inThinking = false
-    // let content = ''
-    // let thinking = ''
-
-    // for await (const chunk of stream) {
-    //   if (chunk.message.thinking) {
-    //     if (!inThinking) {
-    //       inThinking = true
-    //       process.stdout.write('[Thinking]:\n')
-    //     }
-    //     process.stdout.write(chunk.message.thinking)
-    //     thinking += chunk.message.thinking
-    //   }
-    //   else if (chunk.message.content) {
-    //     if (inThinking) {
-    //       inThinking = false
-    //       process.stdout.write('\n\n[Answer]:\n')
-    //     }
-    //     process.stdout.write(chunk.message.content)
-    //     content += chunk.message.content
-    //   }
-    // }
-    // // 打印结束符防止后续输出被覆盖
-    // process.stdout.write('\n')
-
-    // // 合并思考和回答,用于下一次请求 例如: 交给其他类型的agent处理
-    // const new_messages = [{ role: 'assistant', thinking, content }]
+    if (querys.messages) {
+      querys.messages = formatMessages(querys.messages)
+    }
+    if (querys.stream) {
+      return this.fetchStreamRequest('/api/chat', request)
+    }
+    else {
+      return this.fetchRequest('/api/chat', request)
+    }
   }
 
-  async sendRequest(apiPath: string, request: any) {
-
+  /** 普通api请求 */
+  async fetchRequest(url: string, options: ChatRequest): Promise<ChatResponse> {
+    return await this.fetch<ChatResponse>(url, { method: 'POST', data: options })
   }
 
-  /**
-   * 格式化消息为各种模型需要的格式
-   */
-  formatMessages(request: ChatRequest): any[] {
-    return request.messages.map((message) => {
-      let content = ''
-      if (isString(message.content)) {
-        content = message.content
-      }
-      else {
-        content = JSON.stringify(message.content)
-      }
-      return {
-        role: message.role,
-        content,
-      }
+  /** 流式api请求, 中途可取消 */
+  async fetchStreamRequest(url: string, options: ChatRequest): Promise<AsyncIteratorCancel<ChatResponse>> {
+    const abortControl = new AbortController()
+    const response = await this.fetch(url, {
+      signal: abortControl.signal,
+      toJson: false,
+      method: 'POST',
+      data: options,
     })
+    if (!response.body) {
+      throw new Error('Missing body')
+    }
+    const jsonStream = streamToJson<ChatResponse>(response.body)
+    const abortItr = new AsyncIteratorCancel(abortControl, jsonStream, () => {
+      this.streamingRequests.delete(abortItr)
+    })
+    this.streamingRequests.add(abortItr)
+    return abortItr
   }
 }
