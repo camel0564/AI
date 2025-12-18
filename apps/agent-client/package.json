@@ -16,6 +16,7 @@
     "class-variance-authority": "catalog:ui",
     "clsx": "catalog:ui",
     "lucide-vue-next": "catalog:ui",
+    "reka-ui": "catalog:ui",
     "tailwind-merge": "catalog:ui",
     "vue": "catalog:prod"
   },
