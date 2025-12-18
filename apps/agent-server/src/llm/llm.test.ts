@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest'
+import { it } from 'vitest'
 import { LLM } from './llm'
 
 const llm = new LLM({

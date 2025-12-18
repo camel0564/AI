@@ -16,7 +16,6 @@ export default eslintConfig(
     rules: {
       'no-console': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
-      'yaml/sort-keys': 'off',
     },
   },
   // vue 文件配置覆盖
@@ -48,6 +47,20 @@ export default eslintConfig(
           destructuredArrayIgnorePattern: '^_',
         },
       ],
+    },
+  },
+  {
+    files: ['pnpm-workspace.yaml'],
+    rules: {
+      'yaml/sort-keys': 'off',
+      'pnpm/yaml-enforce-settings': ['warn', {
+        settings: {
+          catalogMode: 'strict',
+          cleanupUnusedCatalogs: true,
+          shellEmulator: true,
+          trustPolicy: undefined,
+        },
+      }],
     },
   },
 )

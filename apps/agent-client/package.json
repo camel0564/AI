@@ -14,23 +14,23 @@
   },
   "dependencies": {
     "@ai/tools": "workspace:*",
-    "@vueuse/core": "catalog:",
+    "@vueuse/core": "catalog:prod",
     "class-variance-authority": "catalog:ui",
     "clsx": "catalog:ui",
     "lucide-vue-next": "catalog:ui",
-    "reka-ui": "catalog:",
+    "reka-ui": "catalog:ui",
     "tailwind-merge": "catalog:ui",
     "vue": "catalog:prod"
   },
   "devDependencies": {
     "@tailwindcss/vite": "catalog:ui",
     "@types/node": "catalog:types",
-    "@vitejs/plugin-vue": "catalog:dev",
-    "@vue/tsconfig": "catalog:dev",
+    "@vitejs/plugin-vue": "catalog:vue",
+    "@vue/tsconfig": "catalog:vue",
     "tailwindcss": "catalog:ui",
     "tw-animate-css": "catalog:ui",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
-    "vue-tsc": "catalog:dev"
+    "vue-tsc": "catalog:vue"
   }
 }

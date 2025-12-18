@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { de } from 'zod/locales'
 
 /**
  * 模型调优参数

@@ -1,0 +1,35 @@
+{
+  "name": "@ai/chat",
+  "type": "module",
+  "version": "0.0.0",
+  "port": 6130,
+  "private": true,
+  "scripts": {
+    "dev": "vite --port $(node -p 'require(\"./package.json\").port')",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint --fix",
+    "test": "vitest",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "pinia": "catalog:prod",
+    "vue": "catalog:prod",
+    "vue-router": "catalog:prod"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "catalog:vue",
+    "@types/jsdom": "catalog:types",
+    "@types/node": "catalog:types",
+    "@vitejs/plugin-vue": "catalog:vue",
+    "@vitejs/plugin-vue-jsx": "catalog:vue",
+    "@vue/test-utils": "catalog:vue",
+    "@vue/tsconfig": "catalog:vue",
+    "jsdom": "catalog:vue",
+    "npm-run-all2": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vite-plugin-vue-devtools": "catalog:vue",
+    "vitest": "catalog:test",
+    "vue-tsc": "catalog:vue"
+  }
+}
