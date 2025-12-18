@@ -13,14 +13,19 @@
   },
   "dependencies": {
     "@ai/tools": "workspace:*",
+    "class-variance-authority": "catalog:ui",
+    "clsx": "catalog:ui",
+    "lucide-vue-next": "catalog:ui",
+    "tailwind-merge": "catalog:ui",
     "vue": "catalog:prod"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "catalog:dev",
+    "@tailwindcss/vite": "catalog:ui",
     "@types/node": "catalog:types",
     "@vitejs/plugin-vue": "catalog:dev",
     "@vue/tsconfig": "catalog:dev",
-    "tailwindcss": "catalog:dev",
+    "tailwindcss": "catalog:ui",
+    "tw-animate-css": "catalog:ui",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
     "vite-tsconfig-paths": "catalog:dev",
