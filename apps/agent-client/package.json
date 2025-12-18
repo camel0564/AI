@@ -23,6 +23,7 @@
     "tailwindcss": "catalog:dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
+    "vite-tsconfig-paths": "catalog:dev",
     "vue-tsc": "catalog:dev"
   }
 }
