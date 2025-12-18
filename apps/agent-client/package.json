@@ -16,9 +16,11 @@
     "vue": "catalog:prod"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "catalog:dev",
     "@types/node": "catalog:types",
     "@vitejs/plugin-vue": "catalog:dev",
     "@vue/tsconfig": "catalog:dev",
+    "tailwindcss": "catalog:dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
     "vue-tsc": "catalog:dev"
