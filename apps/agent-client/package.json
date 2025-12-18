@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "port": 6110,
   "private": true,
+  "packageManager": "pnpm@10.23.0",
   "scripts": {
-    "dev": "vite --port $(npm pkg get port)",
+    "dev": "vite --port $(node -p 'require(\"./package.json\").port')",
     "type-check": "vue-tsc --build",
     "lint": "eslint --fix",
     "test": "vitest",
@@ -13,10 +14,11 @@
   },
   "dependencies": {
     "@ai/tools": "workspace:*",
+    "@vueuse/core": "catalog:",
     "class-variance-authority": "catalog:ui",
     "clsx": "catalog:ui",
     "lucide-vue-next": "catalog:ui",
-    "reka-ui": "catalog:ui",
+    "reka-ui": "catalog:",
     "tailwind-merge": "catalog:ui",
     "vue": "catalog:prod"
   },
@@ -29,7 +31,6 @@
     "tw-animate-css": "catalog:ui",
     "typescript": "catalog:dev",
     "vite": "catalog:dev",
-    "vite-tsconfig-paths": "catalog:dev",
     "vue-tsc": "catalog:dev"
   }
 }

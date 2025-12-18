@@ -7,15 +7,15 @@
   "license": "MIT",
   "keywords": [],
   "main": "index.js",
+  "engines": {
+    "node": "24.11.1"
+  },
   "scripts": {
     "dev": "turbo dev",
     "type-check": "turbo type-check",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build"
-  },
-  "devEngines": {
-    "node": "24.11.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",

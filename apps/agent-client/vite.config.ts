@@ -1,8 +1,13 @@
+import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [vue(), tailwindcss(), tsconfigPaths()],
+  plugins: [vue(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 })

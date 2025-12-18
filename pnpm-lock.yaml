@@ -6,8 +6,11 @@ settings:
 
 catalogs:
   default:
+    '@vueuse/core':
+      specifier: ^14.1.0
+      version: 14.1.0
     reka-ui:
-      specifier: ^2.6.1
+      specifier: 2.6.1
       version: 2.6.1
   dev:
     '@antfu/eslint-config':
@@ -43,9 +46,6 @@ catalogs:
     vite:
       specifier: ^7.2.4
       version: 7.2.6
-    vite-tsconfig-paths:
-      specifier: ^6.0.2
-      version: 6.0.2
     vue-tsc:
       specifier: ^3.1.4
       version: 3.1.5
@@ -139,6 +139,9 @@ importers:
       '@ai/tools':
         specifier: workspace:*
         version: link:../../packages/tools
+      '@vueuse/core':
+        specifier: 'catalog:'
+        version: 14.1.0(vue@3.5.25(typescript@5.9.3))
       class-variance-authority:
         specifier: catalog:ui
         version: 0.7.1
@@ -182,9 +185,6 @@ importers:
       vite:
         specifier: catalog:dev
         version: 7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
-      vite-tsconfig-paths:
-        specifier: catalog:dev
-        version: 6.0.2(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))
       vue-tsc:
         specifier: catalog:dev
         version: 3.1.5(typescript@5.9.3)
@@ -1936,11 +1936,24 @@ packages:
   '@vueuse/core@12.8.2':
     resolution: {integrity: sha512-HbvCmZdzAu3VGi/pWYm5Ut+Kd9mn1ZHnn4L5G8kOQTPs/IwIAmJoBrmYk2ckLArgMXZj0AW3n5CAejLUO+PhdQ==}
 
+  '@vueuse/core@14.1.0':
+    resolution: {integrity: sha512-rgBinKs07hAYyPF834mDTigH7BtPqvZ3Pryuzt1SD/lg5wEcWqvwzXXYGEDb2/cP0Sj5zSvHl3WkmMELr5kfWw==}
+    peerDependencies:
+      vue: ^3.5.0
+
   '@vueuse/metadata@12.8.2':
     resolution: {integrity: sha512-rAyLGEuoBJ/Il5AmFHiziCPdQzRt88VxR+Y/A/QhJ1EWtWqPBBAxTAFaSkviwEuOEZNtW8pvkPgoCZQ+HxqW1A==}
 
+  '@vueuse/metadata@14.1.0':
+    resolution: {integrity: sha512-7hK4g015rWn2PhKcZ99NyT+ZD9sbwm7SGvp7k+k+rKGWnLjS/oQozoIZzWfCewSUeBmnJkIb+CNr7Zc/EyRnnA==}
+
   '@vueuse/shared@12.8.2':
     resolution: {integrity: sha512-dznP38YzxZoNloI0qpEfpkms8knDtaoQ6Y/sfS0L7Yki4zh40LFHEhur0odJC6xTHG5dxWVPiUWBXn+wCG2s5w==}
+
+  '@vueuse/shared@14.1.0':
+    resolution: {integrity: sha512-EcKxtYvn6gx1F8z9J5/rsg3+lTQnvOruQd8fUecW99DCK04BkWD7z5KQ/wTAx+DazyoEE9dJt/zV8OIEQbM6kw==}
+    peerDependencies:
+      vue: ^3.5.0
 
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
@@ -3717,16 +3730,6 @@ packages:
       '@swc/wasm':
         optional: true
 
-  tsconfck@3.1.6:
-    resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -3845,14 +3848,6 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
-
-  vite-tsconfig-paths@6.0.2:
-    resolution: {integrity: sha512-c06LOO8fWB5RuEPpEIHXU9t7Dt4DoiPIljnKws9UygIaQo6PoFKawTftz5/QVcO+6pOs/HHWycnq4UrZkWVYnQ==}
-    peerDependencies:
-      vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
 
   vite@7.2.6:
     resolution: {integrity: sha512-tI2l/nFHC5rLh7+5+o7QjKjSR04ivXDF4jcgV0f/bTQ+OJiITy5S6gaynVsEM+7RqzufMnVbIon6Sr5x1SDYaQ==}
@@ -5518,13 +5513,26 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@vueuse/core@14.1.0(vue@3.5.25(typescript@5.9.3))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.1.0
+      '@vueuse/shared': 14.1.0(vue@3.5.25(typescript@5.9.3))
+      vue: 3.5.25(typescript@5.9.3)
+
   '@vueuse/metadata@12.8.2': {}
+
+  '@vueuse/metadata@14.1.0': {}
 
   '@vueuse/shared@12.8.2(typescript@5.9.3)':
     dependencies:
       vue: 3.5.25(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
+
+  '@vueuse/shared@14.1.0(vue@3.5.25(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.25(typescript@5.9.3)
 
   accepts@2.0.0:
     dependencies:
@@ -7515,10 +7523,6 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  tsconfck@3.1.6(typescript@5.9.3):
-    optionalDependencies:
-      typescript: 5.9.3
-
   tslib@2.8.1: {}
 
   tsx@4.21.0:
@@ -7620,17 +7624,6 @@ snapshots:
   v8-compile-cache-lib@3.0.1: {}
 
   vary@1.1.2: {}
-
-  vite-tsconfig-paths@6.0.2(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)):
-    dependencies:
-      debug: 4.4.3
-      globrex: 0.1.2
-      tsconfck: 3.1.6(typescript@5.9.3)
-    optionalDependencies:
-      vite: 7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2):
     dependencies:
