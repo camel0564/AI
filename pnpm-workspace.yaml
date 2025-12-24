@@ -39,6 +39,8 @@ catalogs:
     jsdom: ^27.2.0
     vite-plugin-vue-devtools: ^8.0.5
     vue-tsc: ^3.1.5
+  ui:
+    reka-ui: ^2.7.0
 
 cleanupUnusedCatalogs: true
 
