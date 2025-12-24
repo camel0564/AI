@@ -55,7 +55,7 @@ export default eslintConfig(
       'yaml/sort-keys': 'off',
       'pnpm/yaml-enforce-settings': ['warn', {
         settings: {
-          catalogMode: 'strict',
+          catalogMode: 'prefer',
           cleanupUnusedCatalogs: true,
           shellEmulator: true,
           trustPolicy: undefined,

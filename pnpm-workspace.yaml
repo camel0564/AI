@@ -2,7 +2,7 @@ packages:
   - apps/*
   - packages/*
 
-catalogMode: strict
+catalogMode: prefer
 
 catalogs:
   dev:
