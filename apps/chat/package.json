@@ -12,9 +12,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "pinia": "catalog:prod",
-    "vue": "catalog:prod",
-    "vue-router": "catalog:prod"
+    "pinia": "catalog:vue",
+    "vue": "catalog:vue",
+    "vue-router": "catalog:vue"
   },
   "devDependencies": {
     "@tsconfig/node24": "catalog:vue",

@@ -2,6 +2,10 @@ packages:
   - apps/*
   - packages/*
 
+catalog:
+  '@tailwindcss/vite': ^4.1.18
+  tailwindcss: ^4.1.18
+
 catalogMode: prefer
 
 catalogs:
@@ -20,9 +24,6 @@ catalogs:
     express: ^5.1.0
     ollama: ^0.6.3
     openai: ^6.10.0
-    pinia: ^3.0.4
-    vue: ^3.5.25
-    vue-router: ^4.6.3
     zod: ^4.1.13
   test:
     vitest: ^4.0.14
@@ -30,17 +31,24 @@ catalogs:
     '@types/express': ^5.0.5
     '@types/jsdom': ^27.0.0
     '@types/node': ^24.10.1
+  ui:
+    '@iconify/vue': ^5.0.0
+    reka-ui: ^2.7.0
+    tailwind-merge: ^3.4.0
+    tailwind-variants: ^3.2.2
   vue:
     '@tsconfig/node24': ^24.0.3
     '@vitejs/plugin-vue': ^6.0.2
     '@vitejs/plugin-vue-jsx': ^5.1.2
     '@vue/test-utils': ^2.4.6
     '@vue/tsconfig': ^0.8.1
+    '@vueuse/core': ^14.1.0
     jsdom: ^27.2.0
+    pinia: ^3.0.4
     vite-plugin-vue-devtools: ^8.0.5
+    vue: ^3.5.25
+    vue-router: ^4.6.3
     vue-tsc: ^3.1.5
-  ui:
-    reka-ui: ^2.7.0
 
 cleanupUnusedCatalogs: true
 

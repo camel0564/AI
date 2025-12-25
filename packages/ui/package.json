@@ -11,8 +11,14 @@
     "build": "vue-tsc -b && vite build --config vite.lib.config.ts"
   },
   "dependencies": {
+    "@iconify/vue": "catalog:ui",
+    "@tailwindcss/vite": "catalog:",
+    "@vueuse/core": "catalog:vue",
     "reka-ui": "catalog:ui",
-    "vue": "catalog:prod"
+    "tailwind-merge": "catalog:ui",
+    "tailwind-variants": "catalog:ui",
+    "tailwindcss": "catalog:",
+    "vue": "catalog:vue"
   },
   "devDependencies": {
     "@types/node": "catalog:types",
