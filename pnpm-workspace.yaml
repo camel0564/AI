@@ -16,7 +16,7 @@ catalogs:
     npm-run-all2: ^8.0.4
     pkgroll: ^2.21.4
     tsx: ^4.20.6
-    turbo: ^2.6.3
+    turbo: ^2.9.6
     typescript: ~5.9.3
     vite: ^7.2.4
   prod:
