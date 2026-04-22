@@ -4,7 +4,6 @@
     "target": "esnext", // 决定编译后 JS 代码的[语法版本]; 例如: const,箭头函数等
     "module": "nodenext", // 决定编译后 JS 代码的 [模块系统格式]; nodenext同时兼容 CommonJS 和 ESModule
     "moduleResolution": "nodenext", // 决定 TS 编译器[如何找到import模块] bundler 无需.js后缀名称,需要配置 `tsc-alias` 在build后补全 .js 后缀
-    // "baseUrl": ".", 必须在当前项目中设置
     // "outDir": "dist", // 必须在当前项目中设置; 输出目录
     // "rootDir": "src", // 必须在当前项目中设置;
     "strict": true, // 严格检查类型错误

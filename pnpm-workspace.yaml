@@ -3,6 +3,10 @@ packages:
   - packages/*
 
 catalog:
+  '@langchain/classic': ^1.0.31
+  '@langchain/community': ^1.1.27
+  '@langchain/core': 1.1.40
+  '@langchain/ollama': ^1.2.6
   '@tailwindcss/vite': ^4.1.18
   tailwindcss: ^4.1.18
 

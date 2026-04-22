@@ -1,5 +1,11 @@
 # FlutterBase AI
 
+## 安装依赖
+
+```
+pnpm
+```
+
 ## 命令
 
 - `nr dev` 启动所有包的开发模式

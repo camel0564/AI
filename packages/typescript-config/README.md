@@ -19,7 +19,6 @@
 {
   "extends": "@ai/typescript-config/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "rootDir": "src",
     "paths": {
       "@/*": ["./src/*"]

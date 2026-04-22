@@ -1,7 +1,6 @@
 {
   "extends": "@ai/typescript-config/tsconfig.esbuild.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "rootDir": "src",
     "paths": {
       "@/*": ["./src/*"]

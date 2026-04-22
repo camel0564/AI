@@ -7,7 +7,6 @@
     "moduleResolution": "bundler", // 编译时查找js模块的方式;
     "resolveJsonModule": true, // 允许导入 JSON 文件
     "allowJs": true, // 允许导入 JS 文件
-    // "baseUrl": ".", 必须在当前项目中设置
     // "outDir": "dist", // 必须在当前项目中设置; 输出目录
     // "rootDir": "src", // 必须在当前项目中设置;
     "strict": true, // 严格检查类型错误
