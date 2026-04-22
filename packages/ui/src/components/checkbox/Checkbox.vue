@@ -17,11 +17,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 <template>
   <CheckboxRoot
     v-slot="slotProps" v-bind="forwarded"
-    class="text-red-500 peer border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+    class="bg-red peer border-input data-[state=checked]:bg-red-500 data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
   >
     <CheckboxIndicator class="grid place-content-center text-current transition-none">
       <slot v-bind="slotProps">
-        <Icon icon="radix-icons:check" />
+        <Icon icon="lucide:check" />
       </slot>
     </CheckboxIndicator>
   </CheckboxRoot>
