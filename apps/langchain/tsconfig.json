@@ -1,6 +1,7 @@
 {
   "extends": "@ai/typescript-config/tsconfig.esbuild.json",
   "compilerOptions": {
+    "experimentalDecorators": true,
     "rootDir": "src",
     "outDir": "dist"
   },

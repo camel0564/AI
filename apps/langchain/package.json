@@ -23,6 +23,11 @@
     "@langchain/community": "catalog:",
     "@langchain/core": "catalog:",
     "@langchain/ollama": "catalog:",
+    "cheerio": "catalog:",
+    "chromadb": "catalog:",
+    "dotenv": "catalog:",
+    "ignore": "catalog:",
+    "pdf-parse": "catalog:",
     "zod": "catalog:prod"
   },
   "devDependencies": {
