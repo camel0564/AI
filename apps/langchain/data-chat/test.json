@@ -1,0 +1,38 @@
+[
+  {
+    "type": "human",
+    "data": {
+      "content": "Hi, 我叫小明",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "你好，小明！很高兴认识你。有什么问题或者需要帮助的吗？",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "human",
+    "data": {
+      "content": "我叫什么？",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "你叫小明哦！这个名字很好听。如果你有其他想知道的问题或者需要帮助的事情，随时可以告诉我。",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  }
+]
