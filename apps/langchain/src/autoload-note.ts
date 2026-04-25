@@ -29,7 +29,10 @@ const sortedFiles = pluginFiles.sort((a, b) => {
 })
 // console.log('🚀 sortedFiles:', sortedFiles)
 
-// 异步动态导入所有模块并执行初始化
+/**
+ * 异步动态导入所有模块
+ * TODO: 增加命令行参数,指定要执行的notebook文件和方法
+ */
 export async function autoLoadNotebooks() {
   const plugins: Plugin[] = []
 
@@ -42,11 +45,10 @@ export async function autoLoadNotebooks() {
     plugins.push(plugin)
   }
   // console.log('🚀 plugins:', plugins)
+  console.log(`🚀 已自动导入 ${plugins.length} 个notebook\n`)
 
   // 运行最新类的最后一个方法
   runLastCell(plugins)
-
-  console.log(`🚀 已自动导入 ${plugins.length} 个notebook`)
 }
 
 // 执行加载

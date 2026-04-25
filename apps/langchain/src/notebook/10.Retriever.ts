@@ -3,7 +3,9 @@ import { RecursiveCharacterTextSplitter } from '@langchain/classic/text_splitter
 import { MemoryVectorStore } from '@langchain/classic/vectorstores/memory'
 import { Chroma } from '@langchain/community/vectorstores/chroma'
 import { OllamaEmbeddings } from '@langchain/ollama'
+import { ChromaClient } from 'chromadb'
 import { cell } from '../utils'
+
 /**
  * cell模板
  * 1. Embedding：把文本块转成向量
@@ -12,6 +14,9 @@ import { cell } from '../utils'
  */
 export default class Retriever {
   static cells: string[] = []
+
+  /** 向量数据库的名称 */
+  collectionName = 'kongyiji-vector'
 
   /**
    * 加载文本文件
@@ -45,8 +50,6 @@ export default class Retriever {
    */
   @cell
   async embeddings() {
-    const splitDocs = await this.splitDoc()
-    console.log('🚀 splitDocs:', splitDocs[0])
     /**
      * bge-m3是广泛使用开源文档向量模型
      * 它必须在ollama上下载,才能使用
@@ -61,6 +64,7 @@ export default class Retriever {
     })
 
     // // 手动embedding一段文字查看一下
+    // const splitDocs = await this.splitDoc()
     // const res = await embeddings.embedQuery(splitDocs[0].pageContent)
     // console.log('🚀 查看一下embedings后的向量长什么样:', res)
 
@@ -94,29 +98,35 @@ export default class Retriever {
   }
 
   /**
-   * 本地向量数据库
+   * 保存数据到本地向量数据库
    * 注意这里需要先启动chroma数据库 `npx chroma run`
+   * 多次调用会重复添加数据(需添加唯一id优化)
    *
    * embedding需要一定的时间和费用,所以需要持久化;
    * 这里使用chroma向量数据库
    * 后期可以考虑用docker中部署其他的大型数据库,更简单/更强大;
    */
   @cell
-  async localVectorStore() {
+  async dbSave() {
     const splitDocs = await this.splitDoc()
 
-    // 使用 MemoryVectorStore 构建向量数据库
     const embeddings = await this.embeddings()
     // 替换数据库比较简单 这里和MemoryVectorStore用法基本一致;
     // const vectorStore = await FaissStore.fromDocuments(splitDocs, embeddings)
     const vectorStore = new Chroma(embeddings, {
-      collectionName: 'kongyiji-vector',
+      collectionName: this.collectionName,
       url: 'http://localhost:8000',
     })
 
     // 保存向量到数据库
+    // TODO: 添加唯一hashid,避免重复添加
     const ids = await vectorStore.addDocuments(splitDocs)
     console.log(ids)
+  }
+
+  @cell
+  async dbRetriever() {
+    const vectorStore = await this.dbGetCollection()
 
     // 创建一个 retriever
     const retriever = vectorStore.asRetriever(2)
@@ -128,5 +138,42 @@ export default class Retriever {
     console.log('🚀 2. 下酒菜一般是什么？', res2)
     const res3 = await retriever.invoke('孔乙己用什么谋生？')
     console.log('🚀 3. 孔乙己用什么谋生？', res3)
+  }
+
+  /**
+   * 获取向量数据库中的集合 (类似: mysql 中的 table)
+   * @param collectionName 集合名称
+   */
+  async dbGetCollection(collectionName = this.collectionName) {
+    const embeddings = await this.embeddings()
+    const vectorStore = new Chroma(embeddings, {
+      collectionName,
+      url: 'http://localhost:8000',
+    })
+    return vectorStore
+  }
+
+  // // 重置chroma表
+  // async resetCollection(collectionName = this.collectionName) {
+  //   const client = new ChromaClient({ path: 'http://localhost:8000' })
+  //   try {
+  //     await client.deleteCollection({ name: collectionName })
+  //     console.log(`Collection "${collectionName}" 已删除。`)
+  //     await client.createCollection({ name: collectionName })
+  //     console.log(`Collection "${collectionName}" 已重新创建。`)
+  //   }
+  //   catch (error) {
+  //     console.error(`重置 Collection 时出错:`, error)
+  //   }
+  // }
+
+  // 获取chroma表中的文档数量
+  async chromaClient() {
+    const client = new ChromaClient({ path: 'http://localhost:8000' })
+    // 注意：collectionName 必须与你在 LangChain 中使用的名称完全一致
+    const collectionName = this.collectionName
+    const collection = await client.getCollection({ name: collectionName })
+    const count = await collection.count()
+    console.log(`Collection "${collectionName}" 中的文档数量: ${count}`)
   }
 }

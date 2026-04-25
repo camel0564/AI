@@ -16,9 +16,11 @@
     "lint": "eslint --fix",
     "test": "vitest",
     "build": "pkgroll --clean-dist",
-    "serve": "chmod 755 dist/index.js && node ./dist/index.js"
+    "serve": "chmod 755 dist/index.js && node ./dist/index.js",
+    "db": "chroma run"
   },
   "dependencies": {
+    "@chroma-core/default-embed": "catalog:",
     "@langchain/classic": "catalog:",
     "@langchain/community": "catalog:",
     "@langchain/core": "catalog:",

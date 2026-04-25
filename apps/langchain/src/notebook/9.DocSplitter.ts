@@ -39,7 +39,7 @@ export default class DocSplitter {
     })
 
     const splitDocs = await splitter.splitDocuments(docs)
-    console.log('🚀 splitDocs:', splitDocs)
+    // console.log('🚀 splitDocs:', splitDocs)
     return splitDocs
     // 可以用 chunkviz 可视化的查看分块结果 (https://chunkviz.up.railway.app/)
   }
