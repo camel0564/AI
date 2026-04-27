@@ -57,7 +57,7 @@ export default class RetrieverTuner {
    */
   @cell
   async docCompressoror() {
-    // 另一种更详细的开启verbose模式,打印内部的执行过程,学习和debug用
+    // 环境变量 verbose 模式,打印内部的执行过程,学习和debug用
     process.env.LANGCHAIN_VERBOSE = 'true'
 
     const vectorStore = await new Retriever().dbGetCollection()

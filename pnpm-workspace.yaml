@@ -9,9 +9,11 @@ catalog:
   '@langchain/core': 1.1.40
   '@langchain/ollama': ^1.2.6
   '@tailwindcss/vite': ^4.1.18
+  '@types/express': ^5.0.6
   cheerio: ^1.2.0
   chromadb: ^3.4.3
   dotenv: ^17.4.2
+  express: ^5.2.1
   ignore: ^7.0.5
   pdf-parse: 1.1.4
   tailwindcss: ^4.1.18

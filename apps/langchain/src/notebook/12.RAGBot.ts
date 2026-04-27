@@ -10,9 +10,10 @@ import { ChromaClient } from 'chromadb'
 import { cell } from '../utils'
 
 /**
+ * 参见16章,完整的RAG实现
  * 一个基于私域数据回答问题的 RAG bot
  *
- * demo是一本小说<<地久天长>>
+ * demo是一本小说<<草房子>>
  */
 export default class RAGBot {
   static cells: string[] = []

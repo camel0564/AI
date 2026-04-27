@@ -1,0 +1,20 @@
+[
+  {
+    "type": "human",
+    "data": {
+      "content": "桑桑的爸爸是谁?",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "桑桑的爸爸是桑乔。从原文“‘在。’桑桑趁机跑进屋里，‘爸，有人找。’”和“桑乔走了出来。他认识纸月的外婆，便招呼纸月的外婆与纸月进屋。”可以得知桑桑的父亲名为桑乔。",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  }
+]

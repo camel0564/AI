@@ -75,7 +75,7 @@ export interface JSONChatHistoryInput {
 /**
  * 消息保存为json类
  */
-class JSONChatHistory extends BaseListChatMessageHistory {
+export class JSONChatHistory extends BaseListChatMessageHistory {
   // 这里消息会序列化和反序列化, 需要用到langChain的消息历史存储类(langchain.stores.message); 写死即可;
   lc_namespace = ['langchain', 'stores', 'message']
 

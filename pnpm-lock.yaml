@@ -24,6 +24,9 @@ catalogs:
     '@tailwindcss/vite':
       specifier: ^4.1.18
       version: 4.1.18
+    '@types/express':
+      specifier: ^5.0.6
+      version: 5.0.6
     cheerio:
       specifier: ^1.2.0
       version: 1.2.0
@@ -33,6 +36,9 @@ catalogs:
     dotenv:
       specifier: ^17.4.2
       version: 17.4.2
+    express:
+      specifier: ^5.2.1
+      version: 5.2.1
     ignore:
       specifier: ^7.0.5
       version: 7.0.5
@@ -283,6 +289,9 @@ importers:
       dotenv:
         specifier: 'catalog:'
         version: 17.4.2
+      express:
+        specifier: 'catalog:'
+        version: 5.2.1
       ignore:
         specifier: 'catalog:'
         version: 7.0.5
@@ -296,6 +305,9 @@ importers:
       '@ai/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@types/express':
+        specifier: 'catalog:'
+        version: 5.0.6
       '@types/node':
         specifier: catalog:types
         version: 24.10.1
@@ -9609,7 +9621,7 @@ snapshots:
       jsonwebtoken: 9.0.3
       load-esm: 1.0.3
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.15.0(debug@4.4.3))
+      retry-axios: 2.6.0(axios@1.15.0)
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -10790,7 +10802,7 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  retry-axios@2.6.0(axios@1.15.0(debug@4.4.3)):
+  retry-axios@2.6.0(axios@1.15.0):
     dependencies:
       axios: 1.15.0(debug@4.4.3)
 
