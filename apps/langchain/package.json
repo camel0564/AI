@@ -30,6 +30,7 @@
     "dotenv": "catalog:",
     "express": "catalog:",
     "ignore": "catalog:",
+    "openai": "catalog:",
     "pdf-parse": "catalog:",
     "zod": "catalog:prod"
   },
