@@ -19,7 +19,7 @@ interface Plugin {
 
 // 获取当前目录下所有匹配 /^\d+\..*\.ts$/ 的文件
 const files = fs.readdirSync(notebookPath)
-const pluginFiles = files.filter(file => /^\d+\..*\.ts$/.test(file))
+const pluginFiles = files.filter(file => /^\d+\..*\.ts$/.test(file) && !file.endsWith('.ignore.ts'))
 // console.log('🚀 pluginFiles:', pluginFiles)
 
 const sortedFiles = pluginFiles.sort((a, b) => {
@@ -76,6 +76,8 @@ async function runLastCell(plugins: any[]) {
 
     timerId = setInterval(updateTimer, 100) // 每 100ms 刷新一次显示
 
+    // 开始执行打印
+    console.log(`\n🎬 开始执行: ${Cell.name}.${methodName}()`)
     // 换行并输出最终结果
     await method.call(cellIns)
     if (timerId) {

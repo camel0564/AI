@@ -24,6 +24,7 @@
     "@langchain/classic": "catalog:",
     "@langchain/community": "catalog:",
     "@langchain/core": "catalog:",
+    "@langchain/deepseek": "catalog:",
     "@langchain/ollama": "catalog:",
     "cheerio": "catalog:",
     "chromadb": "catalog:",

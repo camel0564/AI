@@ -18,6 +18,9 @@ catalogs:
     '@langchain/core':
       specifier: 1.1.40
       version: 1.1.40
+    '@langchain/deepseek':
+      specifier: ^1.0.25
+      version: 1.0.25
     '@langchain/ollama':
       specifier: ^1.2.6
       version: 1.2.6
@@ -280,6 +283,9 @@ importers:
       '@langchain/core':
         specifier: 'catalog:'
         version: 1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3)
+      '@langchain/deepseek':
+        specifier: 'catalog:'
+        version: 1.0.25(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))(ws@8.18.3)
       '@langchain/ollama':
         specifier: 'catalog:'
         version: 1.2.6(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))
@@ -1881,6 +1887,12 @@ packages:
     resolution: {integrity: sha512-RJ41GQEMxr9ZEZNoIiPgW0+v9nAY6FEZGlk+MjBghr2GR8He50abLam0XCe1aqUJjuKbqt2lUD6M+6SZ+2NIJg==}
     engines: {node: '>=20'}
 
+  '@langchain/deepseek@1.0.25':
+    resolution: {integrity: sha512-8IvUmS6oeSRt129Z6d7MUqBeQlVmOiP7EfLGWCTh8BMCg6IA0n8uAb7057ryOUgzuVF6GtAAJVKmFF0CnOSIJQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@langchain/core': ^1.0.0
+
   '@langchain/ollama@1.2.6':
     resolution: {integrity: sha512-wEfjRjyB20SMduqjriIBEalXZf1twbfaNTxxLIjKCVrufHPtKJKGy1a0tQHqa+27HwektNNXlcMre7MTuaS5Rw==}
     engines: {node: '>=20'}
@@ -1898,6 +1910,12 @@ packages:
     engines: {node: '>=20'}
     peerDependencies:
       '@langchain/core': ^1.1.39
+
+  '@langchain/openai@1.4.5':
+    resolution: {integrity: sha512-bQ2WMIZfSh02trJLYSAtiIcD3j6EBCiAm9nw0dZWQsVaUxmWc3JJqs8uUte6AkMazmLHzcUIw+14UkXO5fRJvQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@langchain/core': ^1.1.42
 
   '@langchain/textsplitters@1.0.1':
     resolution: {integrity: sha512-rheJlB01iVtrOUzttscutRgLybPH9qR79EyzBEbf1u97ljWyuxQfCwIWK+SjoQTM9O8M7GGLLRBSYE26Jmcoww==}
@@ -7098,6 +7116,13 @@ snapshots:
       - openai
       - ws
 
+  '@langchain/deepseek@1.0.25(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))(ws@8.18.3)':
+    dependencies:
+      '@langchain/core': 1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3)
+      '@langchain/openai': 1.4.5(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))(ws@8.18.3)
+    transitivePeerDependencies:
+      - ws
+
   '@langchain/ollama@1.2.6(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))':
     dependencies:
       '@langchain/core': 1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3)
@@ -7114,6 +7139,15 @@ snapshots:
       - ws
 
   '@langchain/openai@1.4.4(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))(ws@8.18.3)':
+    dependencies:
+      '@langchain/core': 1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3)
+      js-tiktoken: 1.0.21
+      openai: 6.34.0(ws@8.18.3)(zod@4.1.13)
+      zod: 4.1.13
+    transitivePeerDependencies:
+      - ws
+
+  '@langchain/openai@1.4.5(@langchain/core@1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3))(ws@8.18.3)':
     dependencies:
       '@langchain/core': 1.1.40(openai@6.34.0(ws@8.18.3)(zod@4.1.13))(ws@8.18.3)
       js-tiktoken: 1.0.21
@@ -9627,7 +9661,7 @@ snapshots:
       jsonwebtoken: 9.0.3
       load-esm: 1.0.3
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.15.0(debug@4.4.3))
+      retry-axios: 2.6.0(axios@1.15.0)
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -10808,7 +10842,7 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  retry-axios@2.6.0(axios@1.15.0(debug@4.4.3)):
+  retry-axios@2.6.0(axios@1.15.0):
     dependencies:
       axios: 1.15.0(debug@4.4.3)
 
