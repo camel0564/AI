@@ -86,8 +86,8 @@ export default class DocLoader {
   }
 
   /**
-   * 加载静态html网页
-   * langChain 还支持加载js动态渲染的网页; 例如: Playwright/Puppeteer 等 参考官方文档即可
+   * Cheerio 加载静态html网页
+   * langChain 还支持加载js客户端渲染的网页(vue等); 例如: Playwright/Puppeteer 等 参考官方文档即可
    */
   @cell
   async loadWeb() {
@@ -105,7 +105,7 @@ export default class DocLoader {
    */
   @cell
   async loadSearch() {
-    const apiKey = process.env.SERP_API_KEY
+    const apiKey = process.env.SERPAPI_API_KEY
     const question = '什么是 langchain.js'
     const loader = new SerpAPILoader({ q: question, apiKey })
     const answer = await loader.load()

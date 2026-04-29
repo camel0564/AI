@@ -29,6 +29,14 @@ export default class LangChainTools {
     model: 'qwen2.5:7b',
   })
 
+  private deepSeek = new ChatDeepSeek({
+    apiKey: process.env.DEEPSEEK_API_KEY,
+    model: 'deepseek-v4-flash',
+    modelKwargs: {
+      thinking: { type: 'disabled' },
+    }, // 需要关闭思考模式, 思考模式不能完全支持 OpenAI 的接口.
+  })
+
   // ========== 工具定义 ==========
 
   /** 用 LangChain tool() 定义工具 — zod schema 自动转为 JSON Schema */
@@ -71,50 +79,6 @@ export default class LangChainTools {
       schema: this.getCurrentTimeSchema,
     },
   )
-
-  // /** 信息提取工具 — 从非结构化文本中提取结构化数据 */
-  // private extractMovieInfo = tool(
-  //   async ({ title, year, director, rating }: {
-  //     title: string
-  //     year: number
-  //     director: string
-  //     rating: number
-  //   }) => {
-  //     return JSON.stringify({ title, year, director, rating, status: '已提取' })
-  //   },
-  //   {
-  //     name: 'extract_movie_info',
-  //     description: '从用户评论中提取电影信息',
-  //     schema: z.object({
-  //       title: z.string().describe('电影名称'),
-  //       year: z.number().describe('上映年份'),
-  //       director: z.string().describe('导演'),
-  //       rating: z.number().min(1).max(10).describe('评分'),
-  //     }),
-  //   },
-  // )
-
-  // /** 文本标签工具 — 对文本进行自动分类和打标签 */
-  // private tagText = tool(
-  //   async ({ text, category, tags, sentiment }: {
-  //     text: string
-  //     category: string
-  //     tags: string[]
-  //     sentiment: 'positive' | 'negative' | 'neutral'
-  //   }) => {
-  //     return JSON.stringify({ text, category, tags, sentiment, status: '已标注' })
-  //   },
-  //   {
-  //     name: 'tag_text',
-  //     description: '对文本进行分类、打标签和情感分析',
-  //     schema: z.object({
-  //       text: z.string().describe('原始文本'),
-  //       category: z.string().describe('文本分类，如 科技、体育、娱乐、教育'),
-  //       tags: z.array(z.string()).describe('关键词标签列表'),
-  //       sentiment: z.enum(['positive', 'negative', 'neutral']).describe('情感倾向'),
-  //     }),
-  //   },
-  // )
 
   /**
    * 基础用法 — LangChain 自动管理 tool_call 往返
@@ -182,7 +146,7 @@ export default class LangChainTools {
    * - tool_choice: { type: 'function', function: { name } } → 强制调用指定工具
    */
   @cell
-  async toolChoiceControl() {
+  async toolChoice() {
     const llm = new ChatDeepSeek({
       apiKey: process.env.DEEPSEEK_API_KEY,
       model: 'deepseek-v4-flash',
@@ -231,81 +195,144 @@ export default class LangChainTools {
     console.log('🔧 自动选择工具:', JSON.stringify(response3.tool_calls, null, 2)) // get_current_time()
   }
 
-  // /**
-  //  * 信息提取 — 从用户评论中提取结构化数据
-  //  * 常用于: 简历解析、表单自动填充、评论分析
-  //  * 通过 tool_choice 强制指定工具，让 LLM 只做提取不生成多余内容
-  //  */
-  // @cell
-  // async infoExtraction() {
-  //   // bindTools 第二个参数传入工具调用配置
-  //   const model = this.llm.bindTools([this.extractMovieInfo], {
-  //     tool_choice: 'any',
-  //   })
+  /** 文本标签工具 — 对文本进行自动分类和打标签 */
+  private tagText = tool(
+    async ({ text, category, tags, sentiment, language }: {
+      text: string
+      category: string
+      tags: string[]
+      sentiment: 'positive' | 'negative' | 'neutral' // 积极/消极/中性
+      language: string // 文本的核心语言（应为ISO 639-1代码）
+    }) => {
+      return JSON.stringify({ text, category, tags, sentiment, language, status: '已标注' })
+    },
+    {
+      name: 'tag_text',
+      description: '对文本进行分类、打标签和情感分析',
+      schema: z.object({
+        text: z.string().describe('原始文本'),
+        category: z.string().describe('文本分类，如 科技、体育、娱乐、教育'),
+        tags: z.array(z.string()).describe('关键词标签列表'),
+        sentiment: z.enum(['positive', 'negative', 'neutral']).describe('情感倾向'),
+        language: z.string().describe('文本的核心语言（应为ISO 639-1代码）'),
+      }),
+    },
+  )
 
-  //   const response = await model.invoke([
-  //     ['system', '你是一个信息提取助手。从用户评论中提取结构化信息。'],
-  //     ['human', '昨天看了《流浪地球3》，郭帆导演的作品真是越来越棒了，特效炸裂！上映年份2027，我给9分！'],
-  //   ])
+  /**
+   * 文本标注 — 自动分类 + 打标签 + 情感分析
+   * 常用于: 舆情监控、内容审核、CRM 工单分类
+   */
+  @cell
+  async textTagging() {
+    const model = this.deepSeek.bindTools([this.tagText], {
+      tool_choice: {
+        type: 'function',
+        function: { name: 'tag_text' },
+      },
+    })
 
-  //   console.log('📦 提取结果:', JSON.stringify(response.tool_calls, null, 2))
-  // }
+    const articles = [
+      '国足2-1逆转日本队，晋级世界杯决赛圈创造历史',
+      'hello world',
+      '写代码太难了，👴 不干了',
+      '我非常喜欢langChain',
+    ]
 
-  // /**
-  //  * 文本标注 — 自动分类 + 打标签 + 情感分析
-  //  * 常用于: 舆情监控、内容审核、CRM 工单分类
-  //  */
-  // @cell
-  // async textTagging() {
-  //   const model = this.llm.bindTools([this.tagText], {
-  //     tool_choice: 'any',
-  //   })
+    for (const text of articles) {
+      const response = await model.invoke([
+        ['system', '你对文本进行分类、打标签和情感分析。'],
+        ['human', text],
+      ])
+      console.log(`📝 ${text}`)
+      console.log('🚀 response:', response)
+      console.log(`🏷️  ${JSON.stringify(response.tool_calls?.[0]?.args)}\n`)
+    }
+  }
 
-  //   const articles = [
-  //     '英伟达发布新一代GPU，性能提升3倍，股价大涨8%',
-  //     '国足2-1逆转日本队，晋级世界杯决赛圈创造历史',
-  //     '教育部发布"双减"新规，进一步减轻学生课业负担',
-  //   ]
+  /**
+   * 人物关系提取 — 演示嵌套 schema 的使用
+   * 从文本中提取多个人物信息和他们之间的关系
+   */
+  @cell
+  async personRelationExtraction() {
+    // 人物信息 schema - 提取关于一个人的基本信息
+    const personExtractionSchema = z.object({
+      name: z.string().describe('人的名字'),
+      // 人的年龄，可选字段,因为年龄可能是没有的，避免 llm 硬编一个
+      age: z.number().optional().describe('人的年龄，可选字段'),
+    }).describe('提取关于一个人的信息')
 
-  //   for (const text of articles) {
-  //     const response = await model.invoke([
-  //       ['system', '你对文本进行分类、打标签和情感分析。'],
-  //       ['human', text],
-  //     ])
-  //     console.log(`📝 ${text}`)
-  //     console.log(`🏷️  ${JSON.stringify(response.tool_calls?.[0]?.args)}\n`)
-  //   }
-  // }
+    // 人物关系提取 schema - 从文本中提取多人信息和他们之间的关系
+    const relationExtractSchema = z.object({
+      people: z.array(personExtractionSchema).describe('提取所有人'),
+      relation: z.string().describe('人之间的关系，尽量简洁'),
+    }).describe('提取文本中人物及其关系')
 
-  // /**
-  //  * 组合多个工具 — LLM 根据用户意图自动选择合适的工具
-  //  * 无需硬编码路由逻辑
-  //  */
-  // @cell
-  // async multiTools() {
-  //   const model = this.llm.bindTools([this.getWeather, this.tagText])
+    // 人物关系提取工具
+    const extractPersonRelation = tool(
+      async ({ people, relation }: {
+        people: { name: string, age?: number }[]
+        relation: string
+      }) => {
+        return JSON.stringify({ people, relation, status: '已提取' })
+      },
+      {
+        name: 'extract_person_relation',
+        description: '从文本中提取人物信息和他们之间的关系',
+        schema: relationExtractSchema,
+      },
+    )
 
-  //   const requests = [
-  //     '北京明天天气如何？',
-  //     '这篇报道讲的是中国航天员完成太空行走，振奋人心！帮忙分析一下',
-  //   ]
+    const model = this.deepSeek.bindTools([extractPersonRelation], {
+      tool_choice: 'any',
+    })
 
-  //   for (const req of requests) {
-  //     console.log(`👤 ${req}`)
-  //     const response = await model.invoke([
-  //       ['system', '你是一个有用的助手。根据用户问题选择合适的工具。'],
-  //       ['human', req],
-  //     ])
+    const testCases = [
+      '张三今年30岁，他和李四是大学同学，李四28岁。',
+      '马云创立了阿里巴巴，张勇曾担任阿里巴巴CEO。',
+      '小明和小红是兄妹，他们的父母是老王和王太太。',
+    ]
 
-  //     if (response.tool_calls) {
-  //       for (const tc of response.tool_calls) {
-  //         console.log(`🔧 选择工具: ${tc.name}`, JSON.stringify(tc.args))
-  //       }
-  //     }
-  //     else {
-  //       console.log('🤖 直接回答:', response.content)
-  //     }
-  //     console.log('')
-  //   }
-  // }
+    for (const text of testCases) {
+      console.log(`\n📝 输入文本: ${text}`)
+      const response = await model.invoke([
+        ['system', '你是一个信息提取助手。从文本中提取人物信息和关系。'],
+        ['human', text],
+      ])
+      console.log(`🏷️  提取结果: ${JSON.stringify(response.tool_calls?.[0]?.args, null, 2)}`)
+    }
+  }
+
+  /**
+   * 组合多个工具 — LLM 根据用户意图自动选择合适的工具
+   * 无需硬编码路由逻辑
+   */
+  @cell
+  async multiTools() {
+    const model = this.llm.bindTools([this.getWeather, this.tagText])
+
+    const requests = [
+      '北京明天天气如何？',
+      '这篇报道讲的是中国航天员完成太空行走，振奋人心！帮忙分析一下',
+    ]
+
+    for (const req of requests) {
+      console.log(`👤 ${req}`)
+      const response = await model.invoke([
+        ['system', '你是一个有用的助手。根据用户问题选择合适的工具。'],
+        ['human', req],
+      ])
+
+      if (response.tool_calls) {
+        for (const tc of response.tool_calls) {
+          console.log(`🔧 选择工具: ${tc.name}()`, JSON.stringify(tc.args))
+        }
+      }
+      else {
+        console.log('🤖 直接回答:', response.content)
+      }
+      console.log('')
+    }
+  }
 }

@@ -31,6 +31,8 @@
     "dotenv": "catalog:",
     "express": "catalog:",
     "ignore": "catalog:",
+    "langchain": "catalog:",
+    "langsmith": "catalog:",
     "openai": "catalog:",
     "pdf-parse": "catalog:",
     "zod": "catalog:prod"

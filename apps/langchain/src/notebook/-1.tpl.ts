@@ -1,7 +1,7 @@
 import { cell } from '../utils'
 
 /**
- * cell模板
+ * notebook cell模板
  */
 export default class Tpl {
   static cells: string[] = []
