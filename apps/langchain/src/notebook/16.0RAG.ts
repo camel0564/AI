@@ -4,20 +4,11 @@ import { RecursiveCharacterTextSplitter } from '@langchain/classic/text_splitter
 import { Chroma } from '@langchain/community/vectorstores/chroma'
 import { StringOutputParser } from '@langchain/core/output_parsers'
 import { ChatPromptTemplate, MessagesPlaceholder } from '@langchain/core/prompts'
-import { RunnableLambda, RunnablePassthrough, RunnableSequence, RunnableWithMessageHistory } from '@langchain/core/runnables'
+import { RunnablePassthrough, RunnableSequence, RunnableWithMessageHistory } from '@langchain/core/runnables'
 import { ChatOllama, OllamaEmbeddings } from '@langchain/ollama'
 import { ChromaClient } from 'chromadb'
 import { cell } from '../utils'
 import { JSONChatHistory } from './15.1.JSONChatHistory'
-
-function promptVerbose(promptName: string) {
-  return RunnableLambda.from(async (promptValue: string) => {
-    console.log(`\n🚀 ========== prompt start: ${promptName} ==========\n`)
-    console.log('🚀 promptValue:\n', promptValue.toString())
-    console.log(`\n🚀 ========== prompt ened: ${promptName} ===================\n`)
-    return promptValue // 原样传递下去
-  })
-} // 打印提示词
 
 /**
  * 完整的RAG实现
@@ -177,7 +168,7 @@ export default class RAG {
 
   @cell
   /**
-   * RAG 流程
+   * RAG 主流程
    */
   async ragChainWithHistory() {
     // 防止重复添加

@@ -43,6 +43,22 @@
 ### 多智能体 (协作)
 路由解决“谁来做”，多智能体解决“怎么一起做”。
 
+### 最基础的 openai-tools-agent
+
+```
+System
+
+You are a helpful assistant
+{chat_history}
+
+User
+{input}
+
+{agent_scratchpad}
+```
+
+让llm自主决策 tool 调用的能力,prompt无需提供额外信息
+
 ### ReAct
 
 ReAct是MRKL的升级版

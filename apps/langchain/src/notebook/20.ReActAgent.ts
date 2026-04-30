@@ -12,7 +12,7 @@ import { cell } from '../utils'
  * reasoning(推理)+acting(行动)
  * ReAct 的意义是在于，这个框架将 llm 的推理能力、调用工具能力、观察能力结合在一起
  */
-export default class ReAct {
+export default class ReActAgent {
   static cells: string[] = []
 
   private localLlm = new ChatOllama({
