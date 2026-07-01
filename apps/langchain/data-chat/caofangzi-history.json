@@ -34,5 +34,23 @@
       "additional_kwargs": {},
       "response_metadata": {}
     }
+  },
+  {
+    "type": "human",
+    "data": {
+      "content": "桑桑是谁?",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "桑桑是《草房子》中的一个重要角色。根据原著内容，桑桑是油麻地小学的学生，并且是校长桑乔的儿子。他对草房子里的生活充满了喜爱和自豪感，经常在这些草房子里以及周围的地方展现自己的个性和特点。正如原文所述：“桑桑喜欢这些草房子，这既是因为他是草房子里的学生，又是因为他的家也在这草房子里。”此外，他与秃鹤等同学的关系以及他在学校生活中的种种经历都是故事的重要组成部分。",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
   }
 ]

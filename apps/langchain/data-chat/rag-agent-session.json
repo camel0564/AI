@@ -1,0 +1,38 @@
+[
+  {
+    "type": "human",
+    "data": {
+      "content": "《草房子》桑桑的爸爸是谁",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "原文中没有相关内容。",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "human",
+    "data": {
+      "content": "《草房子》桑桑的老师是谁",
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  },
+  {
+    "type": "ai",
+    "data": {
+      "content": "根据原著内容，文中提到了桑桑的老师是蒋一轮。具体原文如下：\n\n“上课前一刻钟，正当教室里乱得听不见人语时，蒋一轮领着纸月出现在门口。教室里顿时安静下来。” \n\n这表明蒋一轮是桑桑的老师之一。",
+      "tool_calls": [],
+      "invalid_tool_calls": [],
+      "additional_kwargs": {},
+      "response_metadata": {}
+    }
+  }
+]

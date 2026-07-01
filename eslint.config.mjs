@@ -63,4 +63,11 @@ export default eslintConfig(
       }],
     },
   },
+  {
+    files: ['apps/langchain/**/*.ts'],
+    rules: {
+      'antfu/no-top-level-await': 'off',
+      'node/prefer-global/process': 'off',
+    },
+  },
 )

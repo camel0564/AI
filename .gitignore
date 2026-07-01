@@ -3,3 +3,4 @@ node_modules
 dist
 *.tsbuildinfo
 apps/langchain/.env
+apps/langchain/chroma/*

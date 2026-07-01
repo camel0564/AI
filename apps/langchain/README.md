@@ -3,9 +3,10 @@
 ## TODO
 
 - [ ] langchain
-- [ ] Claude Code
-- [ ] OpenClaw
 - [ ] LangGraph
+- [ ] Claude Code / OpenCode: 代码助手
+- [ ] OpenClaw: 自动化执行网关
+- [ ] Hermes: 自进化智能体
 
 ## npm 包
 
